@@ -40,6 +40,101 @@ header {
     transition: filter 0.4s ease; /* duración + suavidad */
 }
 
+
+/* --- Estilos Generales de la Sección --- */
+.about-section {
+    position: relative;
+    left: 10px;
+    padding: 80px 0; /* Más espacio arriba y abajo */
+    background-color: #ffffff; /* O el color que prefieras */
+    overflow: hidden; /* Evita que la foto se salga si es muy grande */
+}
+
+.container {
+    max-width: max-content; /* Ancho máximo para que no se estire demasiado en pantallas grandes */
+    margin-left: 10px;
+    padding: 0 20px;
+}
+
+/* --- La Grilla (Grid) --- */
+.about-grid {
+    display: grid;
+    /* Divide el espacio en dos columnas iguales (1fr cada una) */
+    grid-template-columns: 2fr 1fr; /* La columna de texto es el doble de ancha que la de la foto */
+    gap: 50px; /* Espacio de separación entre el texto y la foto */
+    align-items: center; /* Alinea verticalmente el texto con la foto */
+}
+
+/* --- Columna de Texto --- */
+.about-text-content {
+    text-align: left; /* TODO EL TEXTO A LA IZQUIERDA */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+/* --- Columna de Imagen --- */
+.about-image-content {
+    display: flex;
+    justify-content: center; /* Centra la foto dentro de su mitad */
+    align-items: center;
+}
+
+.profile-photo {
+    max-width: 100%; /* La foto no será más ancha que su columna */
+    height: auto; /* Mantiene la proporción */
+    border-radius: 15px; /* Bordes suaves (opcional) */
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1); /* Sombra suave (opcional) */
+    
+    /* Si quieres que la foto cubra todo el alto disponible y se corte un poco:
+       object-fit: cover;
+       height: 100%;
+       width: 100%;
+    */
+}
+
+/* --- Estilos de Texto (Basados en el ejemplo anterior) --- */
+.about-text-content h1 {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    color: #2c3e50;
+}
+
+.about-text-content h3 {
+    margin-top: 1.5rem;
+    color: #34495e;
+}
+
+.about-paragraphs p {
+    margin-bottom: 1rem;
+    line-height: 1.7;
+    color: #555;
+}
+
+.lead {
+    font-size: 1.2rem;
+    font-weight: 500;
+    color: #444;
+    margin-bottom: 1.5rem;
+}
+
+.personal-note {
+    font-style: italic;
+    border-left: 3px solid #ccc;
+    padding-left: 15px;
+    margin: 1.5rem 0;
+    color: #777;
+}
+
+.cta-wrapper {
+    margin-top: 2rem;
+}
+
+
+
+
+
+
 header.shrink {
     height: 120px; /* o reduce padding */
     /* background-color: royalblue; */
@@ -217,6 +312,13 @@ header.shrink {
 }
 
 @media (max-width: 768px) {
+
+ 
+    .about-grid {
+        grid-template-columns: 1fr; /* Una sola columna en móviles */
+        text-align: center; /* Centra el texto en móviles */
+    }
+
   .hamburger {
     display: flex;
   }

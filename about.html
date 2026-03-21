@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Julia Quintana</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="includes/lightbox2-2.12.0/dist/css/lightbox.css">
+    <link href="https://db.onlinewebfonts.com/c/ed1df0d539f369028a8437b87f74b004?family=Ranade+Light" rel="stylesheet"> 
+</head>
+<body>
+    <header class="">
+        <a href="/" class="img-link">
+            <img src="img/cropped-Logo.png" alt="Logo de Julia Quintana" id="logo" class="header-logo" > 
+        </a>
+    </header>
+    <nav id="navbar">
+        <button id="hamburger" class="hamburger" aria-label="Toggle navigation menu">
+            <span class="hamburger-line"></span>
+            <span class="hamburger-line"></span>
+            <span class="hamburger-line"></span>
+        </button>
+        <ul class="nav-menu">
+            <li class="nav-item dropdown">
+                <a href="/ilustration.html">Ilustration</a>
+                <!-- <button class="dropdown-toggle" aria-label="Toggle Ilustration submenu">▼</button>
+                <ul class="dropdown-menu">
+                    <li><a href="/ilustration-1.html">Ilustration 1</a></li>
+                    <li><a href="/ilustration-2.html">Ilustration 2</a></li>
+                    <li><a href="/ilustration-3.html">Ilustration 3</a></li>
+                </ul> -->
+            </li>
+            <li class="nav-item dropdown">
+                <a href="/concept.html">Concept</a>
+                <!-- <button class="dropdown-toggle" aria-label="Toggle Concept submenu">▼</button>
+                <ul class="dropdown-menu">
+                    <li><a href="/concept-1.html">Concept 1</a></li>
+                    <li><a href="/concept-2.html">Concept 2</a></li>
+                    <li><a href="/concept-3.html">Concept 3</a></li>
+                </ul> -->
+            </li>
+            <li class="nav-item dropdown">
+                <a class="no-link" >Projects</a>
+                <button class="dropdown-toggle" aria-label="Toggle Projects submenu">▼</button>
+                <ul class="dropdown-menu">
+                    <li><a href="/UCF.html">UCAnFly</a></li>
+                </ul>
+            </li>
+            <li class="nav-item dropdown">
+                <a href="/personal.html">Personal arts</a>
+            </li>
+            <li class="nav-item dropdown">
+                <a href="/about.html">About me!</a>
+            </li>
+            <li class="nav-item dropdown">
+                <a href="/contact.html">Contact</a>
+            </li>
+        </ul>
+    </nav>
+
+    
+<section class="about-sectiqon">
+    <div class="container fade-in about-grid">
+        
+        <div class="about-text-content">
+            <h1>About me</h1>
+            
+            <p class="lead">
+                Hi there! I’m <strong>Julia</strong>, a character designer, concept artist and graphic designer based in Spain.
+            </p>
+
+            <div class="about-paragraphs">
+                <p>
+                    From a young age, I’ve always been drawn to expressive characters and imaginative worlds. I love creating visuals that feel alive—full of personality, emotion, and small details that tell a story beyond the image. Over time, this passion has evolved into a focus on character design and storytelling, exploring the balance between playful, colorful aesthetics and emotional depth.
+                </p>
+                
+                <h3>Education & Background</h3>
+                <p>
+                    I studied <strong>Fine Arts in Seville</strong> and later completed a two-year Master’s in Concept Art and Illustration at the Universal Arts School, which allowed me to refine my skills and expand my artistic approach across different styles and disciplines.
+                </p>
+
+                <h3>Professional Experience</h3>
+                <p>
+                    Alongside my artistic practice, I’ve worked as a graphic designer for two years on the <strong>UCAnFly project</strong>, collaborating with the <strong>European Space Agency</strong>. This experience gave me the opportunity to contribute in a multidisciplinary team and apply design in technical and collaborative contexts.
+                </p>
+
+                <p>
+                    My work is inspired by animation and stories that blend humor with heartfelt moments. I’m especially interested in creating characters and worlds that feel relatable, expressive, and full of life. Currently, I’m working on my professional portfolio and developing personal projects.
+                </p>
+                
+                <blockquote class="personal-note">
+                    When I’m not drawing, I enjoy doing crafts, experimenting with materials, and finding inspiration in everyday life and the people around me.
+                </blockquote>
+            </div>
+
+            
+        </div>
+
+        <div class="about-image-content">
+            <img src="img/picss.jpeg" alt="Julia - Character Designer" class="profile-photo">
+        </div>
+
+    </div>
+</section>
+
+
+
+
+
+    <footer>
+        <p>&copy; 2026 Pablo C. &amp; Julia Q.</p>
+    </footer>
+    <!-- <div id="lightbox" class="hidden">
+        <span id="close">&times;</span>
+        <img id="lightbox-img" src="">
+    </div>
+
+
+
+    
+    <script>
+        const lightbox = document.getElementById('lightbox');
+        const lightboxImg = document.getElementById('lightbox-img');
+        const closeBtn = document.getElementById('close');
+
+        document.querySelectorAll('.gallery img').forEach(img => {
+            img.addEventListener('click', () => {
+                lightbox.classList.remove('hidden');
+                lightboxImg.src = img.src;
+            });
+        });
+
+        closeBtn.addEventListener('click', () => {
+            lightbox.classList.add('hidden');
+        });
+
+        lightbox.addEventListener('click', (e) => {
+            if(e.target === lightbox) lightbox.classList.add('hidden');
+        });
+        </script> -->
+    <script>
+        const faders = document.querySelectorAll('.fade-in');
+
+        const appearOptions = {
+            threshold: 0.1
+        };
+
+        const appearOnScroll = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if(entry.isIntersecting){
+                    entry.target.classList.add('visible');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, appearOptions);
+
+        faders.forEach(fader => appearOnScroll.observe(fader));
+    </script>
+
+    <script>
+        const header = document.querySelector('header');
+        window.addEventListener('scroll', () => {
+            if(window.scrollY > 5){
+                header.classList.add('shrink');
+            } else {
+                header.classList.remove('shrink');
+            }
+        });
+    </script>
+
+    <script>
+        const navbar = document.getElementById('navbar');
+        const openItems = new Set();
+
+        function refreshNavbarState() {
+            if (openItems.size > 0) {
+                navbar.classList.add('dropdown-open');
+            } else {
+                navbar.classList.remove('dropdown-open');
+            }
+        }
+
+        function closeAllDropdowns() {
+            document.querySelectorAll('.nav-item.dropdown').forEach(otherItem => {
+                otherItem.classList.remove('open');
+            });
+            openItems.clear();
+            refreshNavbarState();
+        }
+
+        // Only use hover on desktop (larger screens) to avoid touch/click chain issues
+        function setupHoverDropdowns() {
+            if (window.matchMedia('(min-width: 769px)').matches) {
+                document.querySelectorAll('.nav-item.dropdown').forEach(item => {
+                    item.addEventListener('mouseenter', () => {
+                        item.classList.add('open');
+                        openItems.add(item);
+                        refreshNavbarState();
+                    });
+                    item.addEventListener('mouseleave', () => {
+                        item.classList.remove('open');
+                        openItems.delete(item);
+                        refreshNavbarState();
+                    });
+                });
+            }
+        }
+
+        setupHoverDropdowns();
+
+        window.addEventListener('resize', () => {
+            closeAllDropdowns();
+        });
+    </script>
+
+    <script>
+        // Hamburger toggle
+        const hamburger = document.getElementById('hamburger');
+        hamburger.addEventListener('click', () => {
+            navbar.classList.toggle('open');
+        });
+
+        // Dropdown toggles
+        document.querySelectorAll('.dropdown-toggle').forEach(button => {
+            button.addEventListener('click', (e) => {
+                e.preventDefault();
+                const item = button.parentElement;
+
+                const isOpen = item.classList.contains('open');
+
+                // Close all dropdowns first
+                document.querySelectorAll('.nav-item.dropdown').forEach(otherItem => {
+                    otherItem.classList.remove('open');
+                });
+
+                // If it was previously closed, open it; otherwise keep closed
+                if (!isOpen) {
+                    item.classList.add('open');
+                }
+            });
+        });
+    </script>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- <script src="lightbox2/js/lightbox.js"></script> -->
+    <script src="includes/lightbox2-2.12.0/dist/js/lightbox.js"></script>
+
+
+
+</body>
+</html>
+
+<!-- 
+Copyright (c) 2015 Lokesh Dhakar
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE. -->
