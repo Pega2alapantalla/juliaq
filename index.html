@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Julia Quintana</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="includes/lightbox2-2.12.0/dist/css/lightbox.css">
+</head>
+<body>
+    <header class="">
+        <a href="/" class="img-link">
+            <img src="img/cropped-Logo.png" alt="Logo de Julia Quintana" id="logo" class="header-logo"> 
+        </a>
+    </header>
+    <nav id="navbar">
+        <ul class="nav-menu">
+            <li class="nav-item dropdown">
+                <a href="/ilustration.html">Ilustration</a>
+                <ul class="dropdown-menu">
+                    <li><a href="/ilustration-1.html">Ilustration 1</a></li>
+                    <li><a href="/ilustration-2.html">Ilustration 2</a></li>
+                    <li><a href="/ilustration-3.html">Ilustration 3</a></li>
+                </ul>
+            </li>
+            <li class="nav-item dropdown">
+                <a href="/concept.html">Concept</a>
+                <ul class="dropdown-menu">
+                    <li><a href="/concept-1.html">Concept 1</a></li>
+                    <li><a href="/concept-2.html">Concept 2</a></li>
+                    <li><a href="/concept-3.html">Concept 3</a></li>
+                </ul>
+            </li>
+            <li class="nav-item dropdown">
+                <a href="/UCF.html">Projects</a>
+                <ul class="dropdown-menu">
+                    <li><a href="/projects-a.html">Project A</a></li>
+                    <li><a href="/projects-b.html">Project B</a></li>
+                </ul>
+            </li>
+            <li class="nav-item dropdown">
+                <a href="/personal.html">Personal arts</a>
+            </li>
+            <li class="nav-item dropdown">
+                <a href="/about.html">About me!</a>
+            </li>
+            <li class="nav-item dropdown">
+                <a href="/contact.html">Contact</a>
+            </li>
+        </ul>
+    </nav>
+
+    <main>
+        <section id ="gallery" class="gallery fade-in">
+            <a class="example-image-link" href="img/img1.png" data-lightbox="image-1" data-title="My caption">
+                <img src = "img/img1.png" alt="Prueba 1" />
+            </a>
+            <a class="example-image-link" href="img/img1.png" data-lightbox="image-1" data-title="My caption2">
+                <img src = "img/img1.png" alt="Prueba 1" />
+            </a>
+            <img src = "img/img1.png" alt="Prueba 1" >
+        </section>
+    </main>
+
+    <section id="contact" class="entry-content; fade-in" style="text-align: center; padding: 40px 20px;">
+        <h1 style="color:#FFC107;"><strong>Get in touch!</strong></h1>
+
+        <p>For any questions or if you are interested in working with me, just drop me a mail!</p>
+
+        <p><strong><a href="mailto:juliaquintanacabeza@gmail.com" target="_blank" rel="noreferrer noopener" style="color:#FFC107;">juliaquintanacabeza@gmail.com</a></strong></p>
+
+        <div style="margin: 30px 0;">
+            <img src="https://celiakaspar.de/wp-content/uploads/2021/01/zelma-1-300x287.png" 
+                alt="Celia Kaspar" 
+                width="300" 
+                height="287" 
+                style="max-width:100%; height:auto;">
+        </div>
+
+        <p>Want to have the whole Portfolio as a PDF?</p>
+
+        <div style="margin: 20px 0;">
+            <a href="https://celiakaspar.de/wp-content/uploads/2023/11/Portfolio-2023-Celia-Kaspar.pdf" 
+            target="_blank" 
+            rel="noopener">
+                <img src="https://celiakaspar.de/wp-content/uploads/2021/02/pdf-300x291.png" 
+                    alt="Download Portfolio PDF" 
+                    style="width:150px; height:146px; max-width:100%; height:auto;">
+            </a>
+        </div>
+    </section>
+
+
+
+
+
+
+
+
+
+
+    <footer>
+        <p>&copy; 2026 Pablo C. &amp; Julia Q.</p>
+    </footer>
+    <!-- <div id="lightbox" class="hidden">
+        <span id="close">&times;</span>
+        <img id="lightbox-img" src="">
+    </div>
+
+
+
+    
+    <script>
+        const lightbox = document.getElementById('lightbox');
+        const lightboxImg = document.getElementById('lightbox-img');
+        const closeBtn = document.getElementById('close');
+
+        document.querySelectorAll('.gallery img').forEach(img => {
+            img.addEventListener('click', () => {
+                lightbox.classList.remove('hidden');
+                lightboxImg.src = img.src;
+            });
+        });
+
+        closeBtn.addEventListener('click', () => {
+            lightbox.classList.add('hidden');
+        });
+
+        lightbox.addEventListener('click', (e) => {
+            if(e.target === lightbox) lightbox.classList.add('hidden');
+        });
+        </script> -->
+    <script>
+        const faders = document.querySelectorAll('.fade-in');
+
+        const appearOptions = {
+            threshold: 0.1
+        };
+
+        const appearOnScroll = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if(entry.isIntersecting){
+                    entry.target.classList.add('visible');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, appearOptions);
+
+        faders.forEach(fader => appearOnScroll.observe(fader));
+    </script>
+
+    <script>
+        const header = document.querySelector('header');
+        window.addEventListener('scroll', () => {
+            if(window.scrollY > 5){
+                header.classList.add('shrink');
+            } else {
+                header.classList.remove('shrink');
+            }
+        });
+    </script>
+
+    <script>
+        const navbar = document.getElementById('navbar');
+        const openItems = new Set();
+
+        function refreshNavbarState() {
+            if (openItems.size > 0) {
+                navbar.classList.add('dropdown-open');
+            } else {
+                navbar.classList.remove('dropdown-open');
+            }
+        }
+
+        document.querySelectorAll('.nav-item.dropdown').forEach(item => {
+            let leaveTimer = null;
+
+            item.addEventListener('mouseenter', () => {
+                if (leaveTimer) {
+                    clearTimeout(leaveTimer);
+                    leaveTimer = null;
+                }
+                item.classList.add('open');
+                openItems.add(item);
+                refreshNavbarState();
+            });
+
+            item.addEventListener('mouseleave', () => {
+                leaveTimer = setTimeout(() => {
+                    item.classList.remove('open');
+                    openItems.delete(item);
+                    refreshNavbarState();
+                    leaveTimer = null;
+                }, 80);
+            });
+        });
+    </script>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- <script src="lightbox2/js/lightbox.js"></script> -->
+    <script src="includes/lightbox2-2.12.0/dist/js/lightbox.js"></script>
+
+
+
+</body>
+</html>
+
+<!-- 
+Copyright (c) 2015 Lokesh Dhakar
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE. -->
