@@ -1,6 +1,21 @@
+@import url(https://db.onlinewebfonts.com/c/ed1df0d539f369028a8437b87f74b004?family=Ranade+Light); 
+
+@font-face {
+    font-family: "Ranade Light";
+    src: url("https://db.onlinewebfonts.com/t/ed1df0d539f369028a8437b87f74b004.eot");
+    src: url("https://db.onlinewebfonts.com/t/ed1df0d539f369028a8437b87f74b004.eot?#iefix")format("embedded-opentype"),
+    url("https://db.onlinewebfonts.com/t/ed1df0d539f369028a8437b87f74b004.woff2")format("woff2"),
+    url("https://db.onlinewebfonts.com/t/ed1df0d539f369028a8437b87f74b004.woff")format("woff"),
+    url("https://db.onlinewebfonts.com/t/ed1df0d539f369028a8437b87f74b004.ttf")format("truetype"),
+    url("https://db.onlinewebfonts.com/t/ed1df0d539f369028a8437b87f74b004.svg#Ranade Light")format("svg");
+}
+
 html {
     scroll-behavior: smooth;
 }
+
+
+
 
 body {
     margin: 0;
@@ -11,7 +26,8 @@ body {
 header {
     padding: 20px;
     /* background-color: #f0f0f0; */
-    background-image: url("img/header-bg.png");
+    /* background-image: url("img/header-bg.png"); */
+    background-color: royalblue;
     background-size: cover;       /* Ajusta la imagen al tamaño del header */
     background-position: center;  /* Centra la imagen */
     background-repeat: no-repeat;
@@ -75,14 +91,15 @@ header.shrink {
 
 .dropdown-toggle {
     display: none;
-    background: #f0f0f0;
-    border: 1px solid #ccc;
+    background:transparent;
+    border: none;
     cursor: pointer;
     font-size: 18px;
     padding: 5px 10px;
 }
 
 #navbar a {
+  font-family: "Ranade Light",sans-serif;
   color: black;
   text-decoration: none;
   transition: color 0.2s ease, font-size 0.2s ease, filter 0.2s ease;
@@ -92,7 +109,7 @@ header.shrink {
 .nav-item > a:hover,
 .dropdown-menu li a:hover {
   color: #0024c4; /* color más brillante */
-  background: #f5f5f5; /* fondo claro */
+  background: #ffffff; /* fondo claro */
   font-size: 120%;
   filter: brightness(1.1);
 }
@@ -125,11 +142,11 @@ header.shrink {
   flex: 1;
   text-align: left;
 }
-
+/* 
 .nav-item:hover > a,
 .nav-item.open > a {
   background: #afafaf;
-}
+} */
 
 .dropdown-menu {
   position: absolute;
@@ -159,7 +176,6 @@ header.shrink {
     text-align: left;
     white-space: nowrap;
     display: block;
-    width: max-content+20px; /* ancho basado en contenido + padding */
 }
 
 .dropdown-menu {
@@ -186,7 +202,7 @@ header.shrink {
 
 /* keep existing open support */
 .nav-item.open > a {
-  background: #afafaf;
+  background: #ffffff;
 }
 
 /* keep submenu visible while mouse moves between parent and submenu */
@@ -206,6 +222,7 @@ header.shrink {
     width: 100%;
     background: #ffffff;
     flex-direction: column;
+    /* justify-content: space-between; */
     padding: 10px 0;
     box-shadow: 0 2px 5px rgba(0,0,0,0.2);
   }
@@ -219,15 +236,16 @@ header.shrink {
   .nav-item > a,
   .nav-item > .dropdown-toggle {
     display: inline-block;
-    vertical-align: middle;
+    vertical-align: left;
   }
   .nav-item > a {
     padding: 15px 20px;
     text-align: left;
   }
   .dropdown-toggle {
-    
-    display: inline-block;
+    position: absolute;
+    right: 10px;
+    display:block;
   }
   .dropdown-menu {
     display: none;
@@ -244,6 +262,10 @@ header.shrink {
   .nav-item.open .dropdown-menu {
     display: block;
   }
+  .nav-item.nav-item:hover{
+    background: transparent;
+  }
+
   /* .nav-item:hover .dropdown-menu {
     opacity: 0;
     transform: translateY(-20px);
