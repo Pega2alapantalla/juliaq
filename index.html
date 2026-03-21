@@ -14,9 +14,15 @@
         </a>
     </header>
     <nav id="navbar">
+        <button id="hamburger" class="hamburger" aria-label="Toggle navigation menu">
+            <span class="hamburger-line"></span>
+            <span class="hamburger-line"></span>
+            <span class="hamburger-line"></span>
+        </button>
         <ul class="nav-menu">
             <li class="nav-item dropdown">
                 <a href="/ilustration.html">Ilustration</a>
+                <button class="dropdown-toggle" aria-label="Toggle Ilustration submenu">▼</button>
                 <ul class="dropdown-menu">
                     <li><a href="/ilustration-1.html">Ilustration 1</a></li>
                     <li><a href="/ilustration-2.html">Ilustration 2</a></li>
@@ -25,6 +31,7 @@
             </li>
             <li class="nav-item dropdown">
                 <a href="/concept.html">Concept</a>
+                <button class="dropdown-toggle" aria-label="Toggle Concept submenu">▼</button>
                 <ul class="dropdown-menu">
                     <li><a href="/concept-1.html">Concept 1</a></li>
                     <li><a href="/concept-2.html">Concept 2</a></li>
@@ -33,18 +40,19 @@
             </li>
             <li class="nav-item dropdown">
                 <a href="/UCF.html">Projects</a>
+                <button class="dropdown-toggle" aria-label="Toggle Projects submenu">▼</button>
                 <ul class="dropdown-menu">
                     <li><a href="/projects-a.html">Project A</a></li>
                     <li><a href="/projects-b.html">Project B</a></li>
                 </ul>
             </li>
-            <li class="nav-item dropdown">
+            <li class="nav-item">
                 <a href="/personal.html">Personal arts</a>
             </li>
-            <li class="nav-item dropdown">
+            <li class="nav-item">
                 <a href="/about.html">About me!</a>
             </li>
-            <li class="nav-item dropdown">
+            <li class="nav-item">
                 <a href="/contact.html">Contact</a>
             </li>
         </ul>
@@ -172,26 +180,63 @@
             }
         }
 
-        document.querySelectorAll('.nav-item.dropdown').forEach(item => {
-            let leaveTimer = null;
-
-            item.addEventListener('mouseenter', () => {
-                if (leaveTimer) {
-                    clearTimeout(leaveTimer);
-                    leaveTimer = null;
-                }
-                item.classList.add('open');
-                openItems.add(item);
-                refreshNavbarState();
+        function closeAllDropdowns() {
+            document.querySelectorAll('.nav-item.dropdown').forEach(otherItem => {
+                otherItem.classList.remove('open');
             });
+            openItems.clear();
+            refreshNavbarState();
+        }
 
-            item.addEventListener('mouseleave', () => {
-                leaveTimer = setTimeout(() => {
-                    item.classList.remove('open');
-                    openItems.delete(item);
-                    refreshNavbarState();
-                    leaveTimer = null;
-                }, 80);
+        // Only use hover on desktop (larger screens) to avoid touch/click chain issues
+        function setupHoverDropdowns() {
+            if (window.matchMedia('(min-width: 769px)').matches) {
+                document.querySelectorAll('.nav-item.dropdown').forEach(item => {
+                    item.addEventListener('mouseenter', () => {
+                        item.classList.add('open');
+                        openItems.add(item);
+                        refreshNavbarState();
+                    });
+                    item.addEventListener('mouseleave', () => {
+                        item.classList.remove('open');
+                        openItems.delete(item);
+                        refreshNavbarState();
+                    });
+                });
+            }
+        }
+
+        setupHoverDropdowns();
+
+        window.addEventListener('resize', () => {
+            closeAllDropdowns();
+        });
+    </script>
+
+    <script>
+        // Hamburger toggle
+        const hamburger = document.getElementById('hamburger');
+        hamburger.addEventListener('click', () => {
+            navbar.classList.toggle('open');
+        });
+
+        // Dropdown toggles
+        document.querySelectorAll('.dropdown-toggle').forEach(button => {
+            button.addEventListener('click', (e) => {
+                e.preventDefault();
+                const item = button.parentElement;
+
+                const isOpen = item.classList.contains('open');
+
+                // Close all dropdowns first
+                document.querySelectorAll('.nav-item.dropdown').forEach(otherItem => {
+                    otherItem.classList.remove('open');
+                });
+
+                // If it was previously closed, open it; otherwise keep closed
+                if (!isOpen) {
+                    item.classList.add('open');
+                }
             });
         });
     </script>
