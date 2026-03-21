@@ -27,7 +27,7 @@ header {
     padding: 20px;
     /* background-color: #f0f0f0; */
     /* background-image: url("img/header-bg.png"); */
-    background-color: royalblue;
+    background-color: white;
     background-size: cover;       /* Ajusta la imagen al tamaño del header */
     background-position: center;  /* Centra la imagen */
     background-repeat: no-repeat;
@@ -42,15 +42,15 @@ header {
 
 header.shrink {
     height: 120px; /* o reduce padding */
-    background-color: rgba(255,255,255,0.95);
+    /* background-color: royalblue; */
     backdrop-filter: blur(5px); /* opcional, queda pro */
 }
 .header-logo {
-    height: 100px; /* Ajusta el tamaño del logo */
+    height: 200px; /* Ajusta el tamaño del logo */
     /* margin-top: 20px; Espacio superior para centrar verticalmente */
     position: absolute;
-    bottom: 10px; /* Ajusta el espacio inferior para centrar verticalmente */
-    left: 10px;
+    bottom: 0px; /* Ajusta el espacio inferior para centrar verticalmente */
+    left: 50px;
     transition: filter 0.4s ease, transform 0.4s ease; /* duración + suavidad */
 }
 
@@ -116,6 +116,12 @@ header.shrink {
 
 #navbar a:hover {
     text-decoration:none;
+}
+
+
+.no-link {
+    cursor: default;
+    
 }
 
 .nav-menu {
