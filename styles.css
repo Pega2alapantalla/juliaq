@@ -215,7 +215,7 @@ header.shrink {
     display: flex;
   }
   .nav-menu {
-    display: none;
+    /* display: none; */
     position: absolute;
     top: 50px;
     left: 0;
@@ -225,9 +225,18 @@ header.shrink {
     /* justify-content: space-between; */
     padding: 10px 0;
     box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+
+      opacity: 0;
+  transform: translateY(-10px);
+  pointer-events: none;
+
+  transition: opacity 0.3s ease, transform 0.3s ease;
   }
   #navbar.open .nav-menu {
-    display: flex;
+    /* display: flex; */
+    opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
   }
   .nav-item {
     width: 100%;
@@ -248,11 +257,16 @@ header.shrink {
     display:block;
   }
   .dropdown-menu {
-    display: none;
+    max-height: 0px;
     position: static;
+    overflow: hidden;
     background: #f9f9f9;
     width: 100%;
-    margin-top: 10px;
+    margin-top: 0px;
+    opacity: 0;
+    transform: translateY(-10px);
+    pointer-events: none;
+    transition: max-height 0.3s ease, opacity 0.3s ease, transform 0.3s ease;
   }
   .nav-item.open {
     flex-direction: row;
@@ -260,7 +274,12 @@ header.shrink {
     align-items: center;
   }
   .nav-item.open .dropdown-menu {
-    display: block;
+    max-height: 500px; /* o un valor suficientemente grande */
+    opacity: 1;
+    transform: translateY(0);
+    transition: max-height 0.3s ease, opacity 0.3s ease, transform 0.3s ease;
+    pointer-events: auto;
+
   }
   .nav-item.nav-item:hover{
     background: transparent;
