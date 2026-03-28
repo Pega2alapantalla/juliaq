@@ -39,7 +39,7 @@
   - [ ]serigrafía
   - [ ]digital
 - [ ]Ilustración → galería de botones a subsecciones
-- [ ]Cambiar “personal arts” → “sketches”
+- [x]Cambiar “personal arts” → “sketches”
 
 ## 🖼️ Lightbox
 
