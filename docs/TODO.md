@@ -19,9 +19,9 @@
 
 ## 🖼️ Visual
 
-- [ ]Logo más grande
+- [x]Logo más grande
 - [ ]Revisar logotipo dinámico
-- [ ]Fondo degradado
+- [x]Fondo degradado
 - [ ]Fondo con textura acuarela
 
 ## 🧭 Navegación
