@@ -8,9 +8,9 @@
 
 ## 🎨 Tipografía
 
-- [ ]Letras más grandes
-- [ ]Todo con la misma tipografía
-- [ ]Get in touch en bold
+- [x]Letras más grandes
+- [x]Todo con la misma tipografía
+- [x]Get in touch en bold
 
 ## 🧱 Layout
 
