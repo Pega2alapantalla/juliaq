@@ -20,7 +20,7 @@
 ## 🖼️ Visual
 
 - [x]Logo más grande
-- [ ]Revisar logotipo dinámico
+- [x]Revisar logotipo dinámico
 - [x]Fondo degradado
 - [ ]Fondo con textura acuarela
 

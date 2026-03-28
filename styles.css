@@ -149,8 +149,8 @@ header.shrink {
     /* margin-top: 20px; Espacio superior para centrar verticalmente */
     position: relative;
     top: 25px; /* Ajusta el espacio inferior para centrar verticalmente */
-    left: 0px;
-    transition: filter 0.4s ease, transform 0.4s ease; /* duración + suavidad */
+    left: 25px;
+    transition: filter 0.4s  ease-in-out, transform 0.4s ease-in-out ; 
    
 }
 
