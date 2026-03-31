@@ -281,7 +281,7 @@ header.shrink {
   position: absolute;
   top: 100%;
   left: 0;
-  background: #ffffff;
+  background: none;
   list-style: none;
   margin: 0;
   padding: 0;
@@ -303,7 +303,7 @@ header.shrink {
     padding: 10px 14px;
     color: black;
     text-align: left;
-    white-space: nowrap;
+    white-space: normal;
     display: block;
 }
 
@@ -331,7 +331,7 @@ header.shrink {
 
 /* keep existing open support */
 .nav-item.open > a {
-  background: #ffffff;
+  background: none;
 }
 
 /* keep submenu visible while mouse moves between parent and submenu */

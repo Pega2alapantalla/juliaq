@@ -32,7 +32,7 @@
 
 ## 🧩 Ilustración
 
-- [ ]Dropdown:
+- [x ]Dropdown:
   - [ ]grabado
   - [ ]pintura
   - [ ]litografía
