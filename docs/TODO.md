@@ -14,7 +14,7 @@
 
 ## 🧱 Layout
 
-- [ ]Cambiar grid a 4 por fila
+- [x]Cambiar grid a 4 por fila
 - [ ]Versión escaparate (solo pocas cosas en index)
 
 ## 🖼️ Visual
@@ -49,7 +49,7 @@
 
 ## 🔗 Contacto / redes
 
-- [ ]Botones: IG, ArtStation, mail
+- [x]Botones: IG, ArtStation, mail
 
 ## 📄 Interacción
 
