@@ -39,6 +39,9 @@ header {
     position: relative; 
     top: 0;
     z-index: 1000; /* Asegura que el header esté por encima de otros elementos */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 
     transition: filter 0.4s ease; /* duración + suavidad */
 }
@@ -144,12 +147,12 @@ header.shrink {
     backdrop-filter: blur(5px); /* opcional, queda pro */
 }
 .header-logo {
-     text-align: left;
+    text-align: left;
     height: 150px; /* Ajusta el tamaño del logo */
     /* margin-top: 20px; Espacio superior para centrar verticalmente */
     position: relative;
     top: 25px; /* Ajusta el espacio inferior para centrar verticalmente */
-    left: 25px;
+    left: 15px;
     transition: filter 0.4s  ease-in-out, transform 0.4s ease-in-out ; 
    
 }
@@ -158,6 +161,25 @@ header.shrink {
     transform: scale(1.05);
     /* filter: brightness(80%); */
 }
+
+.header-rrsslogos {
+    /* position: relative;
+    top: 25px; /* Ajusta según el tamaño del logo */
+    /* right: 25px; Ajusta según el tamaño del logo */ 
+    display: flex;
+    gap: 15px; /* Espacio entre los logos de redes sociales */
+    margin-right: 20px;
+}
+
+.rss-logo {
+    width: 30px; /* Ajusta el tamaño de los logos de redes sociales */
+    height: 30px;
+    transition: transform 0.3s ease;
+}
+.rss-logo:hover {
+    transform: scale(1.2);
+}
+
 
 #navbar {
   display: flex;
@@ -210,7 +232,7 @@ header.shrink {
 .nav-item > a:hover,
 .dropdown-menu li a:hover {
   color: #0024c4; /* color más brillante */
-  background: #ffffff; /* fondo claro */
+  background: none; /* fondo claro */
   font-size: 120%;
   filter: brightness(1.1);
 }
