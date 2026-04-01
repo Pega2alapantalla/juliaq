@@ -10,13 +10,23 @@
     <link href="https://db.onlinewebfonts.com/c/76934e6001ec75dd937de0a2b37c3f8b?family=Ranade+Medium" rel="stylesheet" type="text/css"/>
 </head>
 <body>
+    <div class="header-rrsslogos" style="position: absolute; right: 25px;z-index: 1001;">
+            <a href="https://www.artstation.com/juliaquintana" target="_blank" rel="noopener">
+                <img src="img/logos/artstation_logo.png" alt="ArtStation logo" class="rss-logo">
+            </a>
+            <a href="https://www.instagram.com/juliaquintana.art/" target="_blank" rel="noopener">
+                <img src="img/logos/instagram-circle.png" alt="Instagram logo" class="rss-logo">
+            </a>
+            <a href="mailto:juliaquintanacabeza21@gmail.com" target="_blank" rel="noopener">
+                <img src="img/logos/mail_logo.png" alt="Email logo" class="rss-logo">
+            </a>
+        </div>
     <header class="">
-        <a href="/" class="img-link">
+        <a href="/" class="">
             <img src="img/cropped-Logo.png" alt="Logo de Julia Quintana" id="logo" class="header-logo" > 
         </a>
        
 
-    </header>
     <nav id="navbar">
         <button id="hamburger" class="hamburger" aria-label="Toggle navigation menu">
             <span class="hamburger-line"></span>
@@ -62,20 +72,11 @@
             </li>
         </ul>
         
-         <div class="header-rrsslogos" style="position: absolute; right: 25px;">
-            <a href="https://www.artstation.com/juliaquintana" target="_blank" rel="noopener">
-                <img src="img/logos/artstation_logo.png" alt="ArtStation logo" class="rss-logo">
-            </a>
-            <a href="https://www.instagram.com/juliaquintana.art/" target="_blank" rel="noopener">
-                <img src="img/logos/instagram-circle.png" alt="Instagram logo" class="rss-logo">
-            </a>
-            <a href="mailto:juliaquintanacabeza21@gmail.com" target="_blank" rel="noopener">
-                <img src="img/logos/mail_logo.png" alt="Email logo" class="rss-logo">
-            </a>
-        </div>
+         
 
 
     </nav>
+    </header>
 
     <main>
         <section id ="gallery" class="gallery fade-in">
@@ -181,8 +182,11 @@
         window.addEventListener('scroll', () => {
             if(window.scrollY > 5){
                 header.classList.add('shrink');
+                header-logo.classList.add('shrink');
             } else {
                 header.classList.remove('shrink');
+                header-logo.classList.remove('shrink');
+
             }
         });
     </script>

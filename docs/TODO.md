@@ -67,8 +67,8 @@
 - [x] Tamaño de logo excesivamente grande
 - [x] Poner padding vertical a 10 px en los logos
 
-- [ ] poner logo y barra de menu a la misma altura justificado en el centro
-- [ ] logos arriba a la derecha que no bajen con el menu
+- [x] poner logo y barra de menu a la misma altura justificado en el centro
+- [x] logos arriba a la derecha que no bajen con el menu
 - [ ] Otro boton mas para el portfolio en pdf junto a los de rrss
 - [ ] Quitar desplegables.
 - [ ] poner una barra debnajo en ilustración para que actúe como filtro.

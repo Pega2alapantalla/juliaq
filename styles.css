@@ -35,16 +35,16 @@ header {
     background-size: cover;       /* Ajusta la imagen al tamaño del header */
     background-position: center;  /* Centra la imagen */
     background-repeat: no-repeat;
-    height: 200px; /* Ajusta la altura del header según el tamaño de tu imagen */
+    height: 140px; /* Ajusta la altura del header según el tamaño de tu imagen */
     /* position: relative; */
-    position: relative; 
+    position: sticky; 
     top: 0;
     z-index: 1000; /* Asegura que el header esté por encima de otros elementos */
     display: flex;
     justify-content: space-between;
     align-items: center;
 
-    transition: filter 0.4s ease; /* duración + suavidad */
+    transition: filter 0.4s ease, height 0.4s ease; /* duración + suavidad */
 }
 
 
@@ -141,22 +141,29 @@ header {
 
 
 
-
 header.shrink {
-    height: 120px; /* o reduce padding */
+    height: 120px;
+    /* height: 120px; o reduce padding */
     /* background-color: royalblue; */
-    backdrop-filter: blur(5px); /* opcional, queda pro */
+    /* backdrop-filter: blur(5px); opcional, queda pro */
 }
 .header-logo {
     text-align: left;
     height: 90px; /* Ajusta el tamaño del logo */
     /* margin-top: 20px; Espacio superior para centrar verticalmente */
     position: relative;
-    top: 25px; /* Ajusta el espacio inferior para centrar verticalmente */
-    left: 15px;
-    transition: filter 0.4s  ease-in-out, transform 0.4s ease-in-out ; 
+    top: 00px; /* Ajusta el espacio inferior para centrar verticalmente */
+    margin-left: 100px;
+    transition: filter 0.4s  ease-in-out, transform 0.4s ease-in-out, height 0.4s ease-in-out; /* duración + suavidad */
    
 }
+
+.header-logo.shrink {
+    transform: scale(0.8); /* Ajusta el tamaño del logo al reducir el header */
+    /* margin-top: 10px; Espacio superior para centrar verticalmente */
+    /* top: -10px; Ajusta el espacio inferior para centrar verticalmente */
+}
+
 
 .header-logo:hover {
     transform: scale(1.05);
@@ -164,12 +171,13 @@ header.shrink {
 }
 
 .header-rrsslogos {
-    /* position: relative;
-    top: 25px; /* Ajusta según el tamaño del logo */
+    position: static;
+    justify-content: flex-end;
+    /*top: 25px; /* Ajusta según el tamaño del logo */
     /* right: 25px; Ajusta según el tamaño del logo */ 
     display: flex;
     gap: 15px; /* Espacio entre los logos de redes sociales */
-    margin-right: 20px;
+    margin-right: 118px;
     margin-top: 20px;
 }
 
@@ -190,9 +198,10 @@ header.shrink {
   justify-content: flex-start; /* Pegado a la izquierda */
   gap: 20px;                   /* Espacio entre enlaces */
   padding: 0;
-  position: sticky;
+  position: relative;
   height: 50px;
   top: 0;
+  margin-right: 100px;
   z-index: 1000;
 }
 
