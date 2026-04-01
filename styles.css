@@ -20,8 +20,9 @@ html {
 body {
     margin: 0;
     font-family: "Ranade Light", sans-serif;
-    background:linear-gradient(to bottom, white,royalblue);
-    
+    /* background:linear-gradient(to bottom, white,royalblue); */
+
+    background: white;
 }
 
 header {
@@ -30,7 +31,7 @@ header {
     /* background-image: url("img/header-bg.png"); */
     /* background-color: white; */
     /* background:linear-gradient(to bottom, white,rgb(143, 162, 216));; */
-    background-color: none;
+    background-color: white;
     background-size: cover;       /* Ajusta la imagen al tamaño del header */
     background-position: center;  /* Centra la imagen */
     background-repeat: no-repeat;
@@ -148,7 +149,7 @@ header.shrink {
 }
 .header-logo {
     text-align: left;
-    height: 150px; /* Ajusta el tamaño del logo */
+    height: 90px; /* Ajusta el tamaño del logo */
     /* margin-top: 20px; Espacio superior para centrar verticalmente */
     position: relative;
     top: 25px; /* Ajusta el espacio inferior para centrar verticalmente */
@@ -169,6 +170,7 @@ header.shrink {
     display: flex;
     gap: 15px; /* Espacio entre los logos de redes sociales */
     margin-right: 20px;
+    margin-top: 20px;
 }
 
 .rss-logo {
@@ -184,7 +186,7 @@ header.shrink {
 #navbar {
   display: flex;
   /* background: #ffffff; */
-  background: none;
+  background: white;
   justify-content: flex-start; /* Pegado a la izquierda */
   gap: 20px;                   /* Espacio entre enlaces */
   padding: 0;
@@ -197,7 +199,7 @@ header.shrink {
 .hamburger {
     display: none;
     flex-direction: column;
-    background: none;
+    background: white;
     border: none;
     cursor: pointer;
     padding: 10px;
@@ -213,7 +215,7 @@ header.shrink {
 
 .dropdown-toggle {
     display: none;
-    background:transparent;
+    background:white;
     border: none;
     cursor: pointer;
     font-size: 18px;
@@ -281,7 +283,7 @@ header.shrink {
   position: absolute;
   top: 100%;
   left: 0;
-  background: none;
+  background: white;
   list-style: none;
   margin: 0;
   padding: 0;
@@ -331,7 +333,7 @@ header.shrink {
 
 /* keep existing open support */
 .nav-item.open > a {
-  background: none;
+  background: white;
 }
 
 /* keep submenu visible while mouse moves between parent and submenu */
@@ -453,7 +455,7 @@ header.shrink {
 
 footer {
     padding: 10px;
-    background-color: none;
+    background-color: white;
 }
 
 
