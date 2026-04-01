@@ -69,7 +69,7 @@
 
 - [x] poner logo y barra de menu a la misma altura justificado en el centro
 - [x] logos arriba a la derecha que no bajen con el menu
-- [ ] Otro boton mas para el portfolio en pdf junto a los de rrss
-- [ ] Quitar desplegables.
+- [x] Otro boton mas para el portfolio en pdf junto a los de rrss
+- [x] Quitar desplegables.
 - [ ] poner una barra debnajo en ilustración para que actúe como filtro.
 - [ ] Cuando pinches en ilustración te lleve a all por defecto
