@@ -513,8 +513,8 @@ header.shrink {
     display: block;
     border-radius: 5px;
 }
-.gallery img:hover {
-    transform: scale(1.05);
+.gallery-item:hover {
+    transform: scale(1.02);
 }
 
 
