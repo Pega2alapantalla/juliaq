@@ -233,7 +233,7 @@ header.shrink {
 
 #navbar a {
   font-family: "Ranade Light",'sans-serif';
-  font-size: 20px;
+  font-size: 23px;
   color: black;
   text-decoration: none;
   transition: color 0.2s ease, font-size 0.2s ease, filter 0.2s ease;
@@ -264,6 +264,23 @@ header.shrink {
   padding: 0;
   display: flex;
   text-align: left;
+}
+
+.nav-illustration{
+    display: flex;
+
+}
+.nav-menu.illustration-categories {
+    position: relative;
+    padding-left: 100px;
+    gap: 20px;
+    font-size: 20px;
+    color: royalblue;
+    cursor: pointer;    
+}
+
+.nav-menu .active {
+    font-family: "Ranade Medium", sans-serif;
 }
 
 .nav-item {
@@ -439,22 +456,57 @@ header.shrink {
 }
 
 .gallery {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 10px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px; /* Espacio entre fotos */
     padding: 20px;
+    padding-left: 100px;
+    padding-right: 100px;
+    align-items: flex-start;
 }
 
-.gallery img {
-    width: 100%;
-    height: auto;
-    transition: opacity 0.3s ease, transform 0.3s ease;
+.gallery-item {
+    /* Definimos un tamaño base fijo para que el navegador sepa desde dónde encoger */
+    flex: 0 0 calc(25% - 15px); 
+    width: calc(25% - 15px);
+    
+    /* Animamos todas las propiedades que afectan al espacio */
+    transition: 
+        opacity 0.5s ease, 
+        transform 0.5s ease, 
+        flex-basis 0.5s ease, 
+        width 0.5s ease, 
+        margin 0.5s ease,
+        padding 0.5s ease;
+    
     opacity: 1;
+    transform: scale(1);
+    overflow: hidden;
 }
 
-.gallery img.hidden {
-    opacity: 0;             /* se desvanece */
-    pointer-events: none;    /* no se puede clicar mientras está invisible */
+.gallery-item.hidden {
+    /* Estado invisible */
+    opacity: 0;
+    transform: scale(0.6);
+    
+    /* Estado sin espacio: esto es lo que hace que las otras se muevan */
+    flex-basis: 0;
+    width: 0;
+    margin: 0;
+    padding: 0;
+    
+    /* Evitamos que el gap del flex siga contando */
+    pointer-events: none;
+
+    margin-left: -7.5px; /* Compensa el gap para que no deje espacio al desaparecer */
+    margin-right: -7.5px; /* Compensa el gap para que no deje espacio al desaparecer */
+}
+
+.gallery-item img {
+    width: 100%; /* La imagen siempre llena su contenedor (el div) */
+    height: auto;
+    display: block;
+    border-radius: 5px;
 }
 .gallery img:hover {
     transform: scale(1.05);
