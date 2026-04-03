@@ -470,6 +470,11 @@ header.shrink {
     align-items: flex-start;
 }
 
+.gallery.vertical {
+    flex-direction: column;
+    align-items: center;
+}
+
 .gallery-item {
     /* Definimos un tamaño base fijo para que el navegador sepa desde dónde encoger */
     flex: 0 0 calc(25% - 15px); 
@@ -517,6 +522,31 @@ header.shrink {
     transform: scale(1.02);
 }
 
+.description{
+    max-width: 700px;
+    padding: 20px;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    text-align: justify;  
+}
+.description .title {
+    font-family: "Ranade Medium", sans-serif;
+    margin-bottom: 15px;
+    font-size: 28px;
+    color: royalblue;
+}
+
+
+.back-button {
+    margin-top: 20px;
+    font-family: "Ranade medium", sans-serif;
+    text-decoration: none;
+    color: black;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+}
 
 
 footer {
