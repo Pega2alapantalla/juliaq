@@ -333,15 +333,17 @@ header.shrink {
   transform: translateY(0);
 }
 .dropdown-menu li a {
-    padding: 10px 14px;
+    padding: 12px 18px; /* caja un poco más grande */
     color: black;
     text-align: left;
-    white-space: normal;
-    display: block;
+    white-space: nowrap; /* evitar que 'Royal Bliss' haga wrap */
+    display: inline-block; /* permite transform sin romper el flujo */
+    transition: transform 0.15s ease, color 0.15s ease;
 }
 
 .dropdown-menu {
-    width: calc(var(--max-width, 100px) * 1.4);
+    min-width: 220px; /* caja más ancha para que el texto quede en una sola línea */
+    width: auto;
 }
 
 #navbar.dropdown-open .nav-item:not(.open) > a {
@@ -473,6 +475,11 @@ header.shrink {
 .gallery.vertical {
     flex-direction: column;
     align-items: center;
+}
+
+.gallery.vertical a img {
+    width: 100%;
+    max-width: 600px; /* Limita el ancho máximo de las imágenes en la galería vertical */
 }
 
 .gallery-item {
