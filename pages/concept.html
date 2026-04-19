@@ -83,43 +83,6 @@
     </nav>
     </header>
 
-    <nav class="nav-illustration" aria-label="Illustration categories">
-        <ul class="nav-menu illustration-categories">
-            <li class="nav-item active " data-filter="all"> All </li>
-            <li class="nav-item " data-filter="printmaking"> Printmaking </li>
-            <li class="nav-item" data-filter="painting"> Painting </li>
-            <li class="nav-item" data-filter="lithography"> Lithography </li>
-            <li class="nav-item" data-filter="screen-painting"> Screen painting </li>
-            <li class="nav-item" data-filter="digital-art"> Digital art </li>
-        </ul>
-    </nav>
-
-
-
-
-
-
-
-    <main>
-        <section id="gallery" class="gallery fade-in">
-            <div class="gallery-item" data-category="painting">
-                <img src="/img/img1.png" alt="Painting 1">
-            </div>
-            
-            <div class="gallery-item" data-category="digital-art">
-                <img src="/img/img2.png" alt="Digital Art 1">
-            </div>
-        </section>
-    </main>
-
-
-
-
-
-
-
-
-
 
 
     <footer>
@@ -258,31 +221,10 @@
             });
         });
     </script>
-    <script>
-        const filterButtons = document.querySelectorAll('.illustration-categories .nav-item');
-        const galleryItems = document.querySelectorAll('#gallery .gallery-item');
 
-        filterButtons.forEach(button => {
-            button.addEventListener('click', () => {
-                const filter = button.getAttribute('data-filter');
-
-                // Update active state
-                filterButtons.forEach(btn => btn.classList.remove('active'));
-                button.classList.add('active');
-
-                // Show/hide gallery items
-                galleryItems.forEach(item => {
-                    if (filter === 'all' || item.getAttribute('data-category') === filter) {
-                        // item.style.display = '';
-                        item.classList.remove('hidden');
-                    } else {
-                        // item.style.display = 'none';
-                        item.classList.add('hidden');
-                    }
-                });
-            });
-        });
-    </script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- <script src="lightbox2/js/lightbox.js"></script> -->
+    <script src="includes/lightbox2-2.12.0/dist/js/lightbox.js"></script>
 
 
 
