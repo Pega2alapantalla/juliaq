@@ -8,6 +8,8 @@
     <link rel="stylesheet" href="/includes/lightbox2-2.12.0/dist/css/lightbox.css">
     <link href="https://db.onlinewebfonts.com/c/ed1df0d539f369028a8437b87f74b004?family=Ranade+Light" rel="stylesheet"> 
     <link href="https://db.onlinewebfonts.com/c/76934e6001ec75dd937de0a2b37c3f8b?family=Ranade+Medium" rel="stylesheet" type="text/css"/>
+    <script src="/includes/ui-6.1.13/dist/fancybox/fancybox.umd.js"></script>
+    <link rel="stylesheet" href="/includes/ui-6.1.13/dist/fancybox/fancybox.css" />
 </head>
 <body>
     <div class="header-rrsslogos" >
@@ -113,21 +115,24 @@
 
     <main>
         <div id="gallery vertical" class="gallery vertical" style="padding-right: 40%;">
-            <div class="gallery-item">
-                <img src="/img/img1.png" alt="Painting 1">
-            </div> 
-            <div class="gallery-item">
-                <img src="/img/img2.png" alt="Painting 1">
-            </div>     
-            <div class="gallery-item">
-                <img src="/img/img2.png" alt="Painting 1">
-            </div>   
-            <div class="gallery-item">
-                <img src="/img/img2.png" alt="Painting 1">
-            </div>   
-            <div class="gallery-item">
-                <img src="/img/img2.png" alt="Painting 1">
-            </div>
+            <a href="/img/big-pic.jpeg" data-fancybox="gallery"">
+                <img src="/img/big-pic.jpeg" alt="Gallery image 1" />
+            </a>
+
+            <a href="/img/img2.png" data-fancybox="gallery">
+                <img src="/img/img2.png" alt="Gallery image 2" />
+            </a>
+            <a href="/img/img2.png" data-fancybox="gallery">
+                <img src="/img/img2.png" alt="Gallery image 2" />
+            </a>
+            <a href="/img/img2.png" data-fancybox="gallery">
+                <img src="/img/img2.png" alt="Gallery image 2" />
+            </a>
+            <a href="/img/img2.png" data-fancybox="gallery">
+                <img src="/img/img2.png" alt="Gallery image 2" />
+            </a>
+            
+            
         </div>
         <div id="Description" class="description fade-in" style="position: fixed; top: 40%;left: 60%;">
             <h2 class="title">Title of the work</h2>
@@ -180,6 +185,30 @@
             if(e.target === lightbox) lightbox.classList.add('hidden');
         });
         </script> -->
+
+    <script>
+        Fancybox.bind("[data-fancybox]", {
+            // Your custom options
+
+            Carousel: {
+            Thumbs: false,
+            Toolbar: {
+            display: {
+                left: [],
+                middle: [],
+                right: ["close"],
+            },
+            },
+            Zoomable: {
+            Panzoom: {
+                panMode: "mousemove",
+                mouseMoveFactor: 1.1,
+                clickAction: "zoom",
+                maxScale: 5,ii
+            },
+            },
+        },
+        });</script>
     <script>
         const faders = document.querySelectorAll('.fade-in');
 
