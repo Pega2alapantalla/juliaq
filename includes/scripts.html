@@ -1,5 +1,6 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script src="includes/lightbox2-2.12.0/dist/js/lightbox.js"></script>
+<script src="includes/ui-6.1.13/dist/fancybox/fancybox.umd.js"></script>
+<!-- Lightbox removed: using Fancybox instead -->
 
 <script>
 // Fade-in observer
@@ -39,20 +40,12 @@ faders.forEach(fader => appearOnScroll.observe(fader));
             const sc = window.scrollY || window.pageYOffset;
             const wasFixed = header.classList.contains('fixed');
             if (sc > 5){
+                // Only toggle the visual 'shrink' state — avoid changing layout (position/padding)
                 header.classList.add('shrink');
                 if (headerLogo) headerLogo.classList.add('shrink');
-                if (!wasFixed){
-                    header.classList.add('fixed');
-                    // reserve space so content doesn't jump
-                    try{ document.body.style.paddingTop = header.offsetHeight + 'px'; }catch(e){}
-                }
             } else {
                 header.classList.remove('shrink');
                 if (headerLogo) headerLogo.classList.remove('shrink');
-                if (wasFixed){
-                    header.classList.remove('fixed');
-                    try{ document.body.style.paddingTop = ''; }catch(e){}
-                }
             }
             ticking = false;
         }
