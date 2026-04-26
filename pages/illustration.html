@@ -29,7 +29,7 @@
           <img src="img/img1.png" alt="Painting 1">
         </div>
         <div class="gallery-item" data-category="digital-art">
-          <img src="img/img2.png" alt="Digital Art 1">
+          <img src="img/Freddie Mercury/1.png" alt="Freddie Mercury (2025)">
         </div>
       </section>
     </main>
@@ -146,6 +146,48 @@
       } else {
         insertIncludes();
       }
+
+const filterButtons = document.querySelectorAll('.illustration-categories .nav-item');
+      const galleryItems = document.querySelectorAll('#gallery .gallery-item');
+
+      function collapseAfterFade(item){
+        const onEnd = (e) => {
+          if (e.propertyName === 'opacity'){
+            item.classList.add('collapsed');
+            item.removeEventListener('transitionend', onEnd);
+          }
+        };
+        item.addEventListener('transitionend', onEnd);
+      }
+
+      function showItem(item){
+        // ensure layout space available first
+        item.classList.remove('collapsed');
+        // force reflow so removal of collapsed takes effect
+        void item.offsetWidth;
+        item.classList.remove('hidden');
+      }
+
+      function hideItem(item){
+        if (!item.classList.contains('hidden')){
+          item.classList.add('hidden');
+          collapseAfterFade(item);
+        }
+      }
+
+      filterButtons.forEach(button => {
+        button.addEventListener('click', () => {
+          const filter = button.getAttribute('data-filter');
+          filterButtons.forEach(btn => btn.classList.remove('active'));
+          button.classList.add('active');
+
+          galleryItems.forEach(item => {
+            if (filter === 'all' || item.getAttribute('data-category') === filter) showItem(item); else hideItem(item);
+          });
+        });
+      });
+    
+
        </script>
 
 
