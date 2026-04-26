@@ -21,49 +21,7 @@ faders.forEach(fader => appearOnScroll.observe(fader));
 </script>
 
 <script>
-// Header shrink on scroll — robust: ensure header exists, set sticky, use rAF
-(function(){
-    function initHeaderShrink(){
-        const header = document.querySelector('header');
-        const headerLogo = document.querySelector('.header-logo');
-        if (!header) return;
-
-        // Ensure sticky positioning in case CSS was overridden
-        try{
-            header.style.position = header.style.position || 'sticky';
-            header.style.top = header.style.top || '0';
-            header.style.zIndex = header.style.zIndex || '1000';
-        }catch(e){}
-
-        let ticking = false;
-        function update(){
-            const sc = window.scrollY || window.pageYOffset;
-            const wasFixed = header.classList.contains('fixed');
-            if (sc > 5){
-                // Only toggle the visual 'shrink' state — avoid changing layout (position/padding)
-                header.classList.add('shrink');
-                if (headerLogo) headerLogo.classList.add('shrink');
-            } else {
-                header.classList.remove('shrink');
-                if (headerLogo) headerLogo.classList.remove('shrink');
-            }
-            ticking = false;
-        }
-
-        function onScroll(){
-            if (!ticking){
-                ticking = true;
-                window.requestAnimationFrame(update);
-            }
-        }
-
-        window.addEventListener('scroll', onScroll, {passive: true});
-        // run once to set initial state
-        update();
-    }
-
-    if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', initHeaderShrink); else initHeaderShrink();
-})();
+// Header shrink feature removed to keep header layout stable and sticky.
 </script>
 
 <script>
@@ -139,4 +97,41 @@ document.querySelectorAll('.dropdown-toggle').forEach(button => {
         }
     });
 });
+</script>
+
+<script>
+// Fixed-header fallback: make header fixed and insert a placeholder
+(function(){
+    function enableFixedHeader(){
+        const includeHolder = document.getElementById('include-header');
+        const header = includeHolder ? includeHolder.querySelector('header.site-header') : document.querySelector('header.site-header');
+        if (!header) return;
+
+        // Add class that forces fixed positioning
+        header.classList.add('is-fixed');
+
+        // Create or update placeholder right after the header to avoid content jump
+        function updatePlaceholder(){
+            let ph = document.getElementById('header-placeholder');
+            if (!ph){
+                ph = document.createElement('div');
+                ph.id = 'header-placeholder';
+                header.parentNode.insertBefore(ph, header.nextSibling);
+            }
+            // Use getBoundingClientRect to include padding/visual height
+            const h = header.getBoundingClientRect().height;
+            ph.style.height = h + 'px';
+        }
+
+        // Update on load, resize and when header's size changes
+        updatePlaceholder();
+        window.addEventListener('resize', updatePlaceholder, {passive:true});
+        if (window.ResizeObserver) {
+            const ro = new ResizeObserver(updatePlaceholder);
+            ro.observe(header);
+        }
+    }
+
+    if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', enableFixedHeader); else enableFixedHeader();
+})();
 </script>
