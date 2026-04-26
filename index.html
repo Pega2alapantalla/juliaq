@@ -10,92 +10,26 @@
     <link href="https://db.onlinewebfonts.com/c/76934e6001ec75dd937de0a2b37c3f8b?family=Ranade+Medium" rel="stylesheet" type="text/css"/>
 </head>
 <body>
-    <div class="header-rrsslogos" >
-            <a href="img/img1.png" target="_blank" rel="noopener">
-                <img src="img/logos/pdf_button.png" alt="pdf portfolio" class="rss-logo">
-            </a>
-            <a href="https://www.artstation.com/juliaquintana" target="_blank" rel="noopener">
-                <img src="img/logos/artstation_logo.png" alt="ArtStation logo" class="rss-logo">
-            </a>
-            <a href="https://www.instagram.com/juliaquintana.art/" target="_blank" rel="noopener">
-                <img src="img/logos/instagram-circle.png" alt="Instagram logo" class="rss-logo">
-            </a>
-            <a href="mailto:juliaquintanacabeza21@gmail.com" target="_blank" rel="noopener">
-                <img src="img/logos/mail_logo.png" alt="Email logo" class="rss-logo">
-            </a>
-        </div>
-    <header class="">
-        <a href="/" class="">
-            <img src="img/cropped-Logo.png" alt="Logo de Julia Quintana" id="logo" class="header-logo" > 
-        </a>
-       
-
-    <nav id="navbar">
-        <button id="hamburger" class="hamburger" aria-label="Toggle navigation menu">
-            <span class="hamburger-line"></span>
-            <span class="hamburger-line"></span>
-            <span class="hamburger-line"></span>
-        </button>
-        <ul class="nav-menu">
-            <li class="nav-item dropdown">
-                <a href="pages/illustration.html">Illustration</a>
-                <!-- <button class="dropdown-toggle" aria-label="Toggle Illustration submenu">▼</button>
-                <ul class="dropdown-menu">
-                    <li><a href="/illustration-1.html">Printmaking</a></li>
-                    <li><a href="/illustration-2.html">Painting</a></li>
-                    <li><a href="/illustration-3.html">Lithography</a></li>
-                    <li><a href="/illustration-1.html">Screen painting</a></li>
-                    <li><a href="/illustration-2.html">Digital art</a></li>
-                </ul> -->
-            </li>
-            <li class="nav-item dropdown">
-                <a href="pages/concept.html">Concept</a>
-                <!-- <button class="dropdown-toggle" aria-label="Toggle Concept submenu">▼</button>
-                <ul class="dropdown-menu">
-                    <li><a href="/concept-1.html">Concept 1</a></li>
-                    <li><a href="/concept-2.html">Concept 2</a></li>
-                    <li><a href="/concept-3.html">Concept 3</a></li>
-                </ul> -->
-            </li>
-            <li class="nav-item dropdown">
-                <a >Projects</a>
-                <!-- <a href="pages/projects.html" >Projects</a> -->
-                <button class="dropdown-toggle" aria-label="Toggle Projects submenu">▼</button>
-                <ul class="dropdown-menu">
-                    <li><a href="projects/UCF.html">UCAnFly</a></li>
-                    <li><a href="projects/Royal_Bliss.html">Royal Bliss</a></li>
-                </ul>
-            </li>
-            <li class="nav-item dropdown">
-                <a href="pages/sketches.html">Sketches</a>
-            </li>
-            <li class="nav-item dropdown">
-                <a href="pages/about.html">About me!</a>
-            </li>
-            <li class="nav-item dropdown">
-                <a href="pages/contact.html">Contact</a>
-            </li>
-        </ul>
-        
-         
-
-
-    </nav>
-    </header>
+    <!-- header moved to includes/header.html (original header commented out) -->
+    <!--
+    <div class="header-rrsslogos"> ... original header commented for include ... </div>
+    <header> ... </header>
+    -->
+    <div id="include-header"></div>
 
     <main>
-        <section id ="gallery" class="gallery fade-in">
+        <section id="gallery" class="gallery fade-in">
             <a class="example-image-link" href="img/img1.png" data-lightbox="image-1" data-title="My caption">
-                <img src = "img/img1.png" alt="Prueba 1" />
+                <img src="img/img1.png" alt="Prueba 1" />
             </a>
             <a class="example-image-link" href="img/img1.png" data-lightbox="image-1" data-title="My caption2">
-                <img src = "img/img1.png" alt="Prueba 1" />
+                <img src="img/img1.png" alt="Prueba 1" />
             </a>
-            <img src = "img/img1.png" alt="Prueba 1" >
+            <img src="img/img1.png" alt="Prueba 1" />
         </section>
     </main>
 
-    <section id="contact" class="entry-content; fade-in" style="text-align: center; padding: 40px 20px;">
+    <section id="contact" class="entry-content fade-in" style="text-align: center; padding: 40px 20px;">
         <h1 style="color: royalblue; font-family: 'Ranade Medium', sans-serif;"><strong>Get in touch!</strong></h1>
 
         <p>For any questions or if you are interested in working with me, just drop me a mail!</p>
@@ -103,198 +37,74 @@
         <p><strong><a href="mailto:juliaquintanacabeza21@gmail.com" target="_blank" rel="noreferrer noopener" style="color: royalblue;">juliaquintanacabeza21@gmail.com</a></strong></p>
 
         <div style="margin: 30px 0;">
-            <img src="img/Signature.png" 
-                alt="JQ signature" 
-                width="300" 
-                height="287" 
-                style="max-width:100%; height:auto;">
+            <img src="img/Signature.png" alt="JQ signature" width="300" height="287" style="max-width:100%; height:auto;">
         </div>
 
         <p>Want to have the whole Portfolio as a PDF?</p>
 
         <div style="margin: 20px 0;">
-            <a href="/img/img1.png" 
-            target="_blank" 
-            rel="noopener">
-                <img src="img/logos/pdf_button.png" 
-                    alt="Download Portfolio PDF" 
-                    style="width:150px; height:146px; max-width:100%; height:auto;">
+            <a href="/img/img1.png" target="_blank" rel="noopener">
+                <img src="img/logos/pdf_button.png" alt="Download Portfolio PDF" style="width:150px; height:146px; max-width:100%; height:auto;">
             </a>
         </div>
     </section>
 
+    <!-- footer moved to includes/footer.html -->
+    <div id="include-footer"></div>
 
-
-
-
-
-
-
-
-
-    <footer>
-        <p>&copy; 2026 Pablo C. &amp; Julia Q.</p>
-    </footer>
-    <!-- <div id="lightbox" class="hidden">
-        <span id="close">&times;</span>
-        <img id="lightbox-img" src="">
-    </div>
-
-
-
-    
+    <!-- Loader: fetch includes/header.html, includes/footer.html and includes/scripts.html sequentially -->
     <script>
-        const lightbox = document.getElementById('lightbox');
-        const lightboxImg = document.getElementById('lightbox-img');
-        const closeBtn = document.getElementById('close');
+    (function(){
+      async function loadHtml(url){
+        const res = await fetch(url, {cache: 'no-store'});
+        if (!res.ok) throw new Error('Failed to load ' + url + ' (' + res.status + ')');
+        return await res.text();
+      }
 
-        document.querySelectorAll('.gallery img').forEach(img => {
-            img.addEventListener('click', () => {
-                lightbox.classList.remove('hidden');
-                lightboxImg.src = img.src;
-            });
-        });
+      async function insertIncludes(){
+        // header
+        const headerHolder = document.getElementById('include-header');
+        if (headerHolder && headerHolder.innerHTML.trim() === ''){
+          try{ headerHolder.innerHTML = await loadHtml('includes/header.html'); }catch(e){console.error(e)}
+        }
 
-        closeBtn.addEventListener('click', () => {
-            lightbox.classList.add('hidden');
-        });
+        // footer
+        const footerHolder = document.getElementById('include-footer');
+        if (footerHolder && footerHolder.innerHTML.trim() === ''){
+          try{ footerHolder.innerHTML = await loadHtml('includes/footer.html'); }catch(e){console.error(e)}
+        }
 
-        lightbox.addEventListener('click', (e) => {
-            if(e.target === lightbox) lightbox.classList.add('hidden');
-        });
-        </script> -->
-    <script>
-        const faders = document.querySelectorAll('.fade-in');
-
-        const appearOptions = {
-            threshold: 0.1
-        };
-
-        const appearOnScroll = new IntersectionObserver((entries, observer) => {
-            entries.forEach(entry => {
-                if(entry.isIntersecting){
-                    entry.target.classList.add('visible');
-                    observer.unobserve(entry.target);
-                }
-            });
-        }, appearOptions);
-
-        faders.forEach(fader => appearOnScroll.observe(fader));
-    </script>
-
-    <script>
-        const header = document.querySelector('header');
-        const headerLogo = document.querySelector('.header-logo');
-        window.addEventListener('scroll', () => {
-            if(window.scrollY > 5){
-                header.classList.add('shrink');
-                headerLogo.classList.add('shrink');
+        // scripts: fetch, parse and append sequentially to preserve order
+        try{
+          const scriptsText = await loadHtml('includes/scripts.html');
+          const doc = new DOMParser().parseFromString(scriptsText, 'text/html');
+          const scripts = Array.from(doc.querySelectorAll('script'));
+          for (const s of scripts){
+            if (s.src){
+              await new Promise((res, rej) => {
+                const sc = document.createElement('script');
+                sc.src = s.src;
+                sc.async = false;
+                sc.onload = res; sc.onerror = rej;
+                document.body.appendChild(sc);
+              });
             } else {
-                header.classList.remove('shrink');
-                headerLogo.classList.remove('shrink');
+              const sc = document.createElement('script');
+              sc.textContent = s.textContent;
+              document.body.appendChild(sc);
             }
-        });
+          }
+        } catch(e){ console.error('Error loading scripts include', e) }
+      }
+
+      // Run after DOM ready
+      if (document.readyState === 'loading'){
+        document.addEventListener('DOMContentLoaded', insertIncludes);
+      } else {
+        insertIncludes();
+      }
+    })();
     </script>
-
-    <script>
-        const navbar = document.getElementById('navbar');
-        const openItems = new Set();
-
-        function refreshNavbarState() {
-            if (openItems.size > 0) {
-                navbar.classList.add('dropdown-open');
-            } else {
-                navbar.classList.remove('dropdown-open');
-            }
-        }
-
-        function closeAllDropdowns() {
-            document.querySelectorAll('.nav-item.dropdown').forEach(otherItem => {
-                otherItem.classList.remove('open');
-            });
-            openItems.clear();
-            refreshNavbarState();
-        }
-
-        // Only use hover on desktop (larger screens) to avoid touch/click chain issues
-        function setupHoverDropdowns() {
-            if (window.matchMedia('(min-width: 769px)').matches) {
-                document.querySelectorAll('.nav-item.dropdown').forEach(item => {
-                    item.addEventListener('mouseenter', () => {
-                        item.classList.add('open');
-                        openItems.add(item);
-                        refreshNavbarState();
-                    });
-                    item.addEventListener('mouseleave', () => {
-                        item.classList.remove('open');
-                        openItems.delete(item);
-                        refreshNavbarState();
-                    });
-                });
-            }
-        }
-
-        setupHoverDropdowns();
-
-        window.addEventListener('resize', () => {
-            closeAllDropdowns();
-        });
-    </script>
-
-    <script>
-        // Hamburger toggle
-        const hamburger = document.getElementById('hamburger');
-        hamburger.addEventListener('click', () => {
-            navbar.classList.toggle('open');
-        });
-
-        // Dropdown toggles
-        document.querySelectorAll('.dropdown-toggle').forEach(button => {
-            button.addEventListener('click', (e) => {
-                e.preventDefault();
-                const item = button.parentElement;
-
-                const isOpen = item.classList.contains('open');
-
-                // Close all dropdowns first
-                document.querySelectorAll('.nav-item.dropdown').forEach(otherItem => {
-                    otherItem.classList.remove('open');
-                });
-
-                // If it was previously closed, open it; otherwise keep closed
-                if (!isOpen) {
-                    item.classList.add('open');
-                }
-            });
-        });
-    </script>
-
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <!-- <script src="lightbox2/js/lightbox.js"></script> -->
-    <script src="includes/lightbox2-2.12.0/dist/js/lightbox.js"></script>
-
-
 
 </body>
 </html>
-
-<!-- 
-Copyright (c) 2015 Lokesh Dhakar
-
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE. -->

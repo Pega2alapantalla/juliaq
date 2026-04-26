@@ -1,0 +1,110 @@
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="includes/lightbox2-2.12.0/dist/js/lightbox.js"></script>
+
+<script>
+// Fade-in observer
+const faders = document.querySelectorAll('.fade-in');
+
+const appearOptions = { threshold: 0.1 };
+
+const appearOnScroll = new IntersectionObserver((entries, observer) => {
+    entries.forEach(entry => {
+        if(entry.isIntersecting){
+            entry.target.classList.add('visible');
+            observer.unobserve(entry.target);
+        }
+    });
+}, appearOptions);
+
+faders.forEach(fader => appearOnScroll.observe(fader));
+</script>
+
+<script>
+// Header shrink on scroll
+const header = document.querySelector('header');
+const headerLogo = document.querySelector('.header-logo');
+window.addEventListener('scroll', () => {
+    if(window.scrollY > 5){
+        header.classList.add('shrink');
+        headerLogo.classList.add('shrink');
+    } else {
+        header.classList.remove('shrink');
+        headerLogo.classList.remove('shrink');
+    }
+});
+</script>
+
+<script>
+// Navbar dropdowns and hover setup
+const navbar = document.getElementById('navbar');
+const openItems = new Set();
+
+function refreshNavbarState() {
+    if (openItems.size > 0) {
+        navbar.classList.add('dropdown-open');
+    } else {
+        navbar.classList.remove('dropdown-open');
+    }
+}
+
+function closeAllDropdowns() {
+    document.querySelectorAll('.nav-item.dropdown').forEach(otherItem => {
+        otherItem.classList.remove('open');
+    });
+    openItems.clear();
+    refreshNavbarState();
+}
+
+function setupHoverDropdowns() {
+    if (window.matchMedia('(min-width: 769px)').matches) {
+        document.querySelectorAll('.nav-item.dropdown').forEach(item => {
+            item.addEventListener('mouseenter', () => {
+                item.classList.add('open');
+                openItems.add(item);
+                refreshNavbarState();
+            });
+            item.addEventListener('mouseleave', () => {
+                item.classList.remove('open');
+                openItems.delete(item);
+                refreshNavbarState();
+            });
+        });
+    }
+}
+
+setupHoverDropdowns();
+
+window.addEventListener('resize', () => {
+    closeAllDropdowns();
+});
+</script>
+
+<script>
+// Hamburger toggle (also toggle body class to prevent background scroll)
+const hamburger = document.getElementById('hamburger');
+hamburger.addEventListener('click', () => {
+    const isOpen = navbar.classList.toggle('open');
+    document.body.classList.toggle('nav-open', isOpen);
+    hamburger.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+});
+
+// Dropdown toggles
+document.querySelectorAll('.dropdown-toggle').forEach(button => {
+    button.addEventListener('click', (e) => {
+        e.preventDefault();
+        const item = button.parentElement;
+
+        const isOpen = item.classList.contains('open');
+
+        // Close all dropdowns first
+        document.querySelectorAll('.nav-item.dropdown').forEach(otherItem => {
+            otherItem.classList.remove('open');
+        });
+
+        // If it was previously closed, open it; otherwise keep closed
+        if (!isOpen) {
+            item.classList.add('open');
+        }
+    });
+});
+</script>
