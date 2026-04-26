@@ -6,6 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Julia Quintana</title>
   <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
   <link rel="stylesheet" href="includes/lightbox2-2.12.0/dist/css/lightbox.css">
   <link href="https://db.onlinewebfonts.com/c/ed1df0d539f369028a8437b87f74b004?family=Ranade+Light" rel="stylesheet"> 
   <link href="https://db.onlinewebfonts.com/c/76934e6001ec75dd937de0a2b37c3f8b?family=Ranade+Medium" rel="stylesheet" type="text/css"/>
@@ -20,93 +21,109 @@
     <div id="include-header"></div>
 
     <main>
-        <section id="gallery" class="gallery fade-in">
-            <a class="example-image-link" href="img/img1.png" data-lightbox="image-1" data-title="My caption">
-                <img src="img/img1.png" alt="Prueba 1" />
-            </a>
-            <a class="example-image-link" href="img/img1.png" data-lightbox="image-1" data-title="My caption2">
-                <img src="img/img1.png" alt="Prueba 1" />
-            </a>
-            <img src="img/img1.png" alt="Prueba 1" />
-        </section>
+
+      <div class="swiper mySwiper">
+        <div class="swiper-wrapper">
+          <div class="swiper-slide">
+            <img src="img/img1.png" alt="Descripción de la obra">
+          </div>
+          <div class="swiper-slide">
+            <img src="img/img2.png" alt="Descripción de la obra">
+          </div>
+          <div class="swiper-slide">
+            <img src="img/img3.png" alt="Descripción de la obra">
+          </div>
+        </div>
+      </div>
+      <div class="swiper-button-next"></div>
+      <div class="swiper-button-prev"></div>
+
+      <div class="swiper-pagination"></div>
+
+
+
     </main>
-
-    <section id="contact" class="entry-content fade-in" style="text-align: center; padding: 40px 20px;">
-        <h1 style="color: royalblue; font-family: 'Ranade Medium', sans-serif;"><strong>Get in touch!</strong></h1>
-
-        <p>For any questions or if you are interested in working with me, just drop me a mail!</p>
-
-        <p><strong><a href="mailto:juliaquintanacabeza21@gmail.com" target="_blank" rel="noreferrer noopener" style="color: royalblue;">juliaquintanacabeza21@gmail.com</a></strong></p>
-
-        <div style="margin: 30px 0;">
-            <img src="img/Signature.png" alt="JQ signature" width="300" height="287" style="max-width:100%; height:auto;">
-        </div>
-
-        <p>Want to have the whole Portfolio as a PDF?</p>
-
-        <div style="margin: 20px 0;">
-            <a href="img/img1.png" target="_blank" rel="noopener">
-                <img src="img/logos/pdf_button.png" alt="Download Portfolio PDF" style="width:150px; height:146px; max-width:100%; height:auto;">
-            </a>
-        </div>
-    </section>
 
     <!-- footer moved to includes/footer.html -->
     <div id="include-footer"></div>
-
-    <!-- Loader: fetch includes/header.html, includes/footer.html and includes/scripts.html sequentially -->
-    <script>
-    (function(){
+<script type="module">
+      import Swiper from 'https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.mjs'
       async function loadHtml(url){
-        const res = await fetch(url, {cache: 'no-store'});
-        if (!res.ok) throw new Error('Failed to load ' + url + ' (' + res.status + ')');
-        return await res.text();
+        try {
+          const res = await fetch(url, {cache: 'no-store'});
+          if (!res.ok) return '';
+          return await res.text();
+        } catch(e) { return ''; }
       }
 
       async function insertIncludes(){
-        // header
+        // 1. Inyectar Header
         const headerHolder = document.getElementById('include-header');
-        if (headerHolder && headerHolder.innerHTML.trim() === ''){
-          try{ headerHolder.innerHTML = await loadHtml('includes/header.html'); }catch(e){console.error(e)}
-        }
+        if (headerHolder) headerHolder.innerHTML = await loadHtml('includes/header.html');
 
-        // footer
+        // 2. Inyectar Footer
         const footerHolder = document.getElementById('include-footer');
-        if (footerHolder && footerHolder.innerHTML.trim() === ''){
-          try{ footerHolder.innerHTML = await loadHtml('includes/footer.html'); }catch(e){console.error(e)}
-        }
+        if (footerHolder) footerHolder.innerHTML = await loadHtml('includes/footer.html');
 
-        // scripts: fetch, parse and append sequentially to preserve order
-        try{
+        // 3. Inyectar Scripts externos (Lightbox, JQuery, etc)
+        try {
           const scriptsText = await loadHtml('includes/scripts.html');
           const doc = new DOMParser().parseFromString(scriptsText, 'text/html');
           const scripts = Array.from(doc.querySelectorAll('script'));
           for (const s of scripts){
-            if (s.src){
-              await new Promise((res, rej) => {
-                const sc = document.createElement('script');
-                sc.src = s.src;
-                sc.async = false;
-                sc.onload = res; sc.onerror = rej;
-                document.body.appendChild(sc);
-              });
-            } else {
+            await new Promise((resolve) => {
               const sc = document.createElement('script');
-              sc.textContent = s.textContent;
-              document.body.appendChild(sc);
-            }
+              if (s.src) {
+                const srcAttr = s.getAttribute ? s.getAttribute('src') : s.src;
+                let resolvedSrc = srcAttr;
+                try { resolvedSrc = new URL(srcAttr, document.baseURI).href; } catch(e) { /* leave as-is */ }
+                sc.src = resolvedSrc;
+                sc.async = false;
+                sc.onload = resolve;
+                document.body.appendChild(sc);
+              } else {
+                sc.textContent = s.textContent;
+                document.body.appendChild(sc);
+                resolve();
+              }
+            });
           }
-        } catch(e){ console.error('Error loading scripts include', e) }
+        } catch(e){ console.error('Error loading scripts', e) }
+
+        // 4. Inicializar Swiper después de insertar scripts y cargar imágenes
+        try {
+          const imgs = Array.from(document.querySelectorAll('.mySwiper img'));
+          await Promise.all(imgs.map(img => img.complete ? Promise.resolve() : new Promise(res => { img.addEventListener('load', res); img.addEventListener('error', res); })));
+        } catch(e) { /* ignore image load errors */ }
+        initSwiper();
       }
 
-      // Run after DOM ready
-      if (document.readyState === 'loading'){
+      function initSwiper() {
+        if (document.querySelector('.mySwiper')) {
+          console.log('initSwiper: checking Swiper availability', typeof Swiper, document.querySelectorAll('.swiper-slide').length);
+          if (typeof Swiper === 'undefined') {
+            console.error('Swiper is not available on window; slider will not initialize');
+            return;
+          }
+          new Swiper('.mySwiper', {
+                loop: true,
+                autoplay: { delay: 5000 },
+                pagination: { el: '.swiper-pagination', clickable: true },
+                navigation: { nextEl: '.swiper-button-next', prevEl: '.swiper-button-prev' },
+                effect: 'fade',
+                fadeEffect: { crossFade: true },
+            });
+        }
+      }
+
+      // Ejecución
+      if (document.readyState === 'loading') {
         document.addEventListener('DOMContentLoaded', insertIncludes);
       } else {
         insertIncludes();
       }
-    })();
-    </script>
+       </script>
+
 
 </body>
 </html>
