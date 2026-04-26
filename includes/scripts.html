@@ -1,5 +1,5 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script src="includes/lightbox2-2.12.0/dist/js/lightbox.js"></script>
+<script src="/includes/lightbox2-2.12.0/dist/js/lightbox.js"></script>
 
 <script>
 // Fade-in observer
@@ -20,18 +20,57 @@ faders.forEach(fader => appearOnScroll.observe(fader));
 </script>
 
 <script>
-// Header shrink on scroll
-const header = document.querySelector('header');
-const headerLogo = document.querySelector('.header-logo');
-window.addEventListener('scroll', () => {
-    if(window.scrollY > 5){
-        header.classList.add('shrink');
-        headerLogo.classList.add('shrink');
-    } else {
-        header.classList.remove('shrink');
-        headerLogo.classList.remove('shrink');
+// Header shrink on scroll — robust: ensure header exists, set sticky, use rAF
+(function(){
+    function initHeaderShrink(){
+        const header = document.querySelector('header');
+        const headerLogo = document.querySelector('.header-logo');
+        if (!header) return;
+
+        // Ensure sticky positioning in case CSS was overridden
+        try{
+            header.style.position = header.style.position || 'sticky';
+            header.style.top = header.style.top || '0';
+            header.style.zIndex = header.style.zIndex || '1000';
+        }catch(e){}
+
+        let ticking = false;
+        function update(){
+            const sc = window.scrollY || window.pageYOffset;
+            const wasFixed = header.classList.contains('fixed');
+            if (sc > 5){
+                header.classList.add('shrink');
+                if (headerLogo) headerLogo.classList.add('shrink');
+                if (!wasFixed){
+                    header.classList.add('fixed');
+                    // reserve space so content doesn't jump
+                    try{ document.body.style.paddingTop = header.offsetHeight + 'px'; }catch(e){}
+                }
+            } else {
+                header.classList.remove('shrink');
+                if (headerLogo) headerLogo.classList.remove('shrink');
+                if (wasFixed){
+                    header.classList.remove('fixed');
+                    try{ document.body.style.paddingTop = ''; }catch(e){}
+                }
+            }
+            ticking = false;
+        }
+
+        function onScroll(){
+            if (!ticking){
+                ticking = true;
+                window.requestAnimationFrame(update);
+            }
+        }
+
+        window.addEventListener('scroll', onScroll, {passive: true});
+        // run once to set initial state
+        update();
     }
-});
+
+    if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', initHeaderShrink); else initHeaderShrink();
+})();
 </script>
 
 <script>
