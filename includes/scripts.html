@@ -135,3 +135,35 @@ document.querySelectorAll('.dropdown-toggle').forEach(button => {
     if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', enableFixedHeader); else enableFixedHeader();
 })();
 </script>
+<script>
+// Shrink header on scroll: scale logo, reduce header padding, hide rrss logos
+(function(){
+    const THRESHOLD = 48; // px scrolled to trigger shrink
+    let ticking = false;
+
+    function update() {
+        ticking = false;
+        const header = document.querySelector('header.site-header');
+        if (!header) return;
+        const sc = window.scrollY || window.pageYOffset;
+        if (sc > THRESHOLD) header.classList.add('shrink'); else header.classList.remove('shrink');
+    }
+
+    function onScroll(){
+        if (!ticking){
+            ticking = true;
+            window.requestAnimationFrame(update);
+        }
+    }
+
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', () => {
+            window.addEventListener('scroll', onScroll, {passive:true});
+            update();
+        });
+    } else {
+        window.addEventListener('scroll', onScroll, {passive:true});
+        update();
+    }
+})();
+</script>

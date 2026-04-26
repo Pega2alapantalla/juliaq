@@ -207,6 +207,34 @@ header.fixed, .site-header.fixed {
     transition: filter 0.4s  ease-in-out, transform 0.2s ease-in-out, height 0.4s ease-in-out;
 }
 
+/* Shrink visual state: logo smaller, header thinner, rrss logos hidden */
+.site-header.shrink {
+    /* reduce vertical padding when shrinked: keep horizontal padding */
+    padding: 0.2% 5%;
+}
+.site-header.shrink .header-logo {
+    --logo-scale: 0.78;
+}
+.site-header .header-logo {
+    transform-origin: left bottom;
+    transform: scale(var(--logo-scale, 1));
+    transition: transform 200ms ease, height 200ms ease;
+}
+.site-header .header-rrsslogos {
+    transition: opacity 180ms ease, transform 180ms ease, visibility 180ms ease;
+}
+.site-header.shrink .header-rrsslogos {
+    opacity: 0;
+    transform: translateY(-6px);
+    visibility: hidden;
+    pointer-events: none;
+}
+
+/* Make navbar remain aligned: reduce navbar height slightly when shrink */
+.site-header.shrink #navbar {
+    height: 40px;
+}
+
 /* Hover debe aumentar un 10% respecto al valor actual de --logo-scale
    (si está shrinked se escala 1.1 * 0.8 = 0.88). */
 .header-logo:hover,
