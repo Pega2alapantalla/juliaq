@@ -142,16 +142,7 @@
             return;
           }
           new Swiper('.mySwiper', {
-            autoplay: {
-            delay: 4000,                // 4000 milisegundos = 4 segundos
-            disableOnInteraction: false, // ¡IMPORTANTE! Si el usuario toca el carrusel, 
-                                     // el auto-play NO se detendrá para siempre.
-            pauseOnMouseEnter: true,     // El carrusel se para si el ratón está encima 
-                                     // (ideal para que Julia pueda ver una obra con calma)
-
-    // Añade esto para que la transición sea fluida
-            speed: 800,
-            }, // Velocidad de la transición en ms (0.8 segundos de movimiento)
+            autoplay: false,
             // PARÁMETROS CLAVE:
             slidesPerView: 1.2,      // Muestra una imagen y un trozo de la siguiente
             spaceBetween: 10,        // Separación en píxeles entre fotos
@@ -170,6 +161,7 @@
             },
             });
         }
+        
       }
 
       // Ejecución
