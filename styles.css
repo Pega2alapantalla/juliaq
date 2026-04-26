@@ -911,6 +911,14 @@ footer{
     transform: translateY(0);
 }
 
+/* Ensure gallery sections using the fade-in helper remain visible by default
+   (some pages don't toggle the .visible class). This makes the gallery
+   images visible unless explicitly hidden by the filtering JS). */
+.gallery.fade-in {
+    opacity: 1 !important;
+    transform: none !important;
+}
+
 
 
 .swiper {
