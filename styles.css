@@ -40,16 +40,13 @@ header {
     background-size: cover;       /* Ajusta la imagen al tamaño del header */
     background-position: center;  /* Centra la imagen */
     background-repeat: no-repeat;
-    height: 140px; /* Ajusta la altura del header según el tamaño de tu imagen */
+    height: auto; /* Let content determine header height */
     /* position: relative; */
     position: sticky; 
     top: 0;
     z-index: 1000; /* Asegura que el header esté por encima de otros elementos */
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-
-    padding: 0 20px 0 120px;
+    /* layout handled by .site-header grid */
+    padding: 0;
     transition: filter 0.4s ease, height 0.4s ease; /* duración + suavidad */
 }
 
@@ -62,6 +59,7 @@ header.fixed, .site-header.fixed {
     z-index: 2000 !important;
     background: white;
 }
+
 
 
 /* --- Estilos Generales de la Sección --- */
@@ -166,9 +164,11 @@ header.shrink {
 .header-logo {
     text-align: left;
     height: 90px; /* Ajusta el tamaño del logo */
-    position: relative;
-    top: 18px;
     margin-left: 0;
+    /* Make logo span both rows and align to bottom-left of the left column */
+    grid-column: 1;
+    grid-row: 1 / span 2;
+    align-self: end;
     /* escala controlada por variable para permitir hover relativo al estado shrink */
     --logo-scale: 1;
     transform: scale(var(--logo-scale));
@@ -190,17 +190,39 @@ header.shrink {
     /* filter: brightness(80%); */
 }
 
-.header-rrsslogos {
-    position: absolute;
-    /* Más separación vertical desde el tope y mayor margen derecho
-       para alinear con el borde derecho de la barra de navegación */
-    top: 22px;
-    right: 58px;
-    display: flex;
-    gap: 14px; /* Espacio entre los logos de redes sociales */
-    align-items: center;
-    z-index: 2100;
+.site-header {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    grid-template-rows: auto auto;
+    column-gap: 24px;
+    row-gap:25%;
+    align-items: start;
+    padding: 2% 5%;
 }
+
+.logo-link {
+    /* place logo in the left column, spanning both rows */
+    grid-column: 1;
+    grid-row: 1 / span 2;
+    justify-self: start;
+    align-self: end; /* Aligns the logo to the bottom of its grid area */
+}
+
+.header-rrsslogos {
+    /* place logos in the right column, first row */
+    grid-column: 2;
+    grid-row: 1;
+    justify-self: end;
+    display: flex;
+    gap: 14px;
+    align-items: center;
+}
+
+/* header layout placements for grid */
+/* Ensure logo spans the full left column (both rows) */
+.header-logo { grid-column: 1; grid-row: 1 / span 2; justify-self: start; }
+#navbar { grid-column: 2; grid-row: 2; justify-self: end; }
+
 
 .rss-logo {
     /* width: 30px; Ajusta el tamaño de los logos de redes sociales */
@@ -212,15 +234,29 @@ header.shrink {
 }
 
 @media (max-width: 768px) {
+    .site-header {
+        grid-template-columns: 1fr;
+        row-gap: 8px;
+        padding: 10px 14px;
+    }
     .header-rrsslogos {
-        /* Un poco más de separación vertical y margen derecho en móviles */
-        top: 14px;
-        right: 20px;
+        grid-column: 1;
+        grid-row: 1;
+        justify-self: start;
         gap: 10px;
     }
+    #navbar {
+        grid-column: 1;
+        grid-row: 2;
+        justify-self: stretch;
+        width: 100%;
+    }
+    .header-logo {
+        grid-column: 1;
+        grid-row: 3;
+        justify-self: center;
+    }
     .rss-logo { width: 24px; height: 24px; }
-    .header-logo { top: 6px; }
-    #navbar { top: 6px; }
 }
 
 
@@ -230,10 +266,8 @@ header.shrink {
     justify-content: flex-start;
     gap: 32px; /* más espacio entre enlaces */
     padding: 0;
-    position: relative;
-    height: 50px;
-    top: 18px;
-    margin-right: 20px; /* alineado con contacto */
+        position: relative;
+        height: 50px;
     z-index: 1000;
 }
 
@@ -409,12 +443,9 @@ header.shrink {
     }
     .header-rrsslogos {
         /* Mantener alineación en pantallas medianas */
-        top: 12px;
-        right: 32px;
         gap: 12px;
     }
     #navbar {
-        margin-right: 20px;
         gap: 12px;
     }
     .hamburger {
@@ -617,9 +648,6 @@ header.shrink {
     .header-logo {
         max-height: 48px;
         margin-left: 12px;
-    }
-    #navbar {
-        margin-right: 12px;
     }
     #navbar a {
         font-size: 16px;
