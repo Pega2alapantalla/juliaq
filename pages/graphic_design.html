@@ -31,101 +31,120 @@
       </section>
     </main>
 
+    <!-- footer moved to includes/footer.html -->
     <div id="include-footer"></div>
-
-    <script>
-      (function(){
-        async function loadHtml(url){
+<script type="module">
+      import Swiper from 'https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.mjs'
+      async function loadHtml(url){
+        try {
           const res = await fetch(url, {cache: 'no-store'});
-          if (!res.ok) throw new Error('Failed to load ' + url + ' (' + res.status + ')');
+          if (!res.ok) return '';
           return await res.text();
-        }
+        } catch(e) { return ''; }
+      }
 
-        async function insertIncludes(){
-          const headerHolder = document.getElementById('include-header');
-          if (headerHolder && headerHolder.innerHTML.trim() === ''){
-            try{ headerHolder.innerHTML = await loadHtml('includes/header.html'); }catch(e){console.error('header fetch failed', e)}
-          }
+      async function insertIncludes(){
+        // 1. Inyectar Header
+        const headerHolder = document.getElementById('include-header');
+        if (headerHolder) headerHolder.innerHTML = await loadHtml('includes/header.html');
 
-          const footerHolder = document.getElementById('include-footer');
-          if (footerHolder && footerHolder.innerHTML.trim() === ''){
-            try{ footerHolder.innerHTML = await loadHtml('includes/footer.html'); }catch(e){console.error('footer fetch failed', e)}
-          }
+        // 2. Inyectar Footer
+        const footerHolder = document.getElementById('include-footer');
+        if (footerHolder) footerHolder.innerHTML = await loadHtml('includes/footer.html');
 
-          try{
-            const scriptsText = await loadHtml('includes/scripts.html');
-            const doc = new DOMParser().parseFromString(scriptsText, 'text/html');
-            const scripts = Array.from(doc.querySelectorAll('script'));
-            for (const s of scripts){
-              if (s.src){
-                await new Promise((res, rej) => {
-                  const sc = document.createElement('script');
-                  sc.src = s.src;
-                  sc.async = false;
-                  sc.onload = res; sc.onerror = rej;
-                  document.body.appendChild(sc);
-                });
+        // 3. Inyectar Scripts externos (Lightbox, JQuery, etc)
+        try {
+          const scriptsText = await loadHtml('includes/scripts.html');
+          const doc = new DOMParser().parseFromString(scriptsText, 'text/html');
+          const scripts = Array.from(doc.querySelectorAll('script'));
+          for (const s of scripts){
+            await new Promise((resolve) => {
+              const sc = document.createElement('script');
+              if (s.src) {
+                const srcAttr = s.getAttribute ? s.getAttribute('src') : s.src;
+                let resolvedSrc = srcAttr;
+                try { resolvedSrc = new URL(srcAttr, document.baseURI).href; } catch(e) { /* leave as-is */ }
+                sc.src = resolvedSrc;
+                sc.async = false;
+                sc.onload = resolve;
+                document.body.appendChild(sc);
               } else {
-                const sc = document.createElement('script');
                 sc.textContent = s.textContent;
                 document.body.appendChild(sc);
+                resolve();
               }
-            }
-          } catch(e){ console.error('Error loading shared scripts', e) }
-
-          if (window.__afterIncludesCallbacks && Array.isArray(window.__afterIncludesCallbacks)){
-            window.__afterIncludesCallbacks.forEach(fn => { try{ fn(); } catch(e){ console.error(e) } });
+            });
           }
-        }
+        } catch(e){ console.error('Error loading scripts', e) }
 
-        if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', insertIncludes); else insertIncludes();
-      })();
-    </script>
-
-    <script>
-    window.__afterIncludesCallbacks = window.__afterIncludesCallbacks || [];
-    window.__afterIncludesCallbacks.push(function(){
-      const filterButtons = document.querySelectorAll('.illustration-categories .nav-item');
-      const galleryItems = document.querySelectorAll('#gallery .gallery-item');
-
-      function collapseAfterFade(item){
-        const onEnd = (e) => {
-          if (e.propertyName === 'opacity'){
-            item.classList.add('collapsed');
-            item.removeEventListener('transitionend', onEnd);
+        // Initialize Fancybox (if available)
+        try {
+          if (window.Fancybox) {
+            Fancybox.bind('[data-fancybox]', {
+              Carousel: {
+                Thumbs: false,
+                Toolbar: {
+                  display: {
+                    left: [],
+                    middle: [],
+                    right: ["zoom", "close"]
+                  }
+                }
+              },
+              Panzoom: {
+                maxScale: 5
+              },
+              dragToClose: false
+            });
           }
-        };
-        item.addEventListener('transitionend', onEnd);
+        } catch(e) { console.warn('Fancybox init failed', e) }
+
+        // 4. Inicializar Swiper después de insertar scripts and cargar imágenes
+        try {
+          const imgs = Array.from(document.querySelectorAll('.mySwiper img'));
+          await Promise.all(imgs.map(img => img.complete ? Promise.resolve() : new Promise(res => { img.addEventListener('load', res); img.addEventListener('error', res); })));
+        } catch(e) { /* ignore image load errors */ }
+        initSwiper();
       }
 
-      function showItem(item){
-        // ensure layout space available first
-        item.classList.remove('collapsed');
-        // force reflow so removal of collapsed takes effect
-        void item.offsetWidth;
-        item.classList.remove('hidden');
-      }
+      function initSwiper() {
+        if (document.querySelector('.mySwiper')) {
+          console.log('initSwiper: checking Swiper availability', typeof Swiper, document.querySelectorAll('.swiper-slide').length);
+          if (typeof Swiper === 'undefined') {
+            console.error('Swiper is not available on window; slider will not initialize');
+            return;
+          }
+          new Swiper('.mySwiper', {
+            autoplay: false,
+            // PARÁMETROS CLAVE:
+            slidesPerView: 1.2,      // Muestra una imagen y un trozo de la siguiente
+            spaceBetween: 10,        // Separación en píxeles entre fotos
+            centeredSlides: false,    // Empieza pegado a la izquierda
+            
+            // Adaptabilidad (Responsive)
+            breakpoints: {
+                640: { slidesPerView: 2.2 },  // En tablets se ven 2 y pico
+                1024: { slidesPerView: 4 }     // En PC se ven 4 como en tu imagen
+            },
 
-      function hideItem(item){
-        if (!item.classList.contains('hidden')){
-          item.classList.add('hidden');
-          collapseAfterFade(item);
+            loop: true,
+            navigation: {
+                nextEl: '.swiper-button-next',
+                prevEl: '.swiper-button-prev',
+            },
+            });
         }
+        
       }
 
-      filterButtons.forEach(button => {
-        button.addEventListener('click', () => {
-          const filter = button.getAttribute('data-filter');
-          filterButtons.forEach(btn => btn.classList.remove('active'));
-          button.classList.add('active');
+      // Ejecución
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', insertIncludes);
+      } else {
+        insertIncludes();
+      }
+       </script>
 
-          galleryItems.forEach(item => {
-            if (filter === 'all' || item.getAttribute('data-category') === filter) showItem(item); else hideItem(item);
-          });
-        });
-      });
-    });
-    </script>
 
-  </body>
+</body>
 </html>
