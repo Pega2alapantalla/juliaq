@@ -746,10 +746,19 @@ header.shrink {
 }
 
 
-footer {
+footer{
     
     padding: 10px;
     background-color: white;
+}
+
+.footer p {
+    margin: 4px 0;
+    font-size: 14px;
+    color: #555;
+    text-align: center;
+    line-height: 1.2;
+    
 }
 
 
