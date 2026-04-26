@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+    <base href="/juliaq/">
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Illustration — Julia Quintana</title>
@@ -25,10 +26,10 @@
     <main>
       <section id="gallery" class="gallery fade-in">
         <div class="gallery-item" data-category="painting">
-          <img src="/img/img1.png" alt="Painting 1">
+          <img src="img/img1.png" alt="Painting 1">
         </div>
         <div class="gallery-item" data-category="digital-art">
-          <img src="/img/img2.png" alt="Digital Art 1">
+          <img src="img/img2.png" alt="Digital Art 1">
         </div>
       </section>
     </main>
@@ -46,16 +47,16 @@
         async function insertIncludes(){
           const headerHolder = document.getElementById('include-header');
           if (headerHolder && headerHolder.innerHTML.trim() === ''){
-            try{ headerHolder.innerHTML = await loadHtml('../includes/header.html'); }catch(e){console.error('header fetch failed', e)}
+            try{ headerHolder.innerHTML = await loadHtml('includes/header.html'); }catch(e){console.error('header fetch failed', e)}
           }
 
           const footerHolder = document.getElementById('include-footer');
           if (footerHolder && footerHolder.innerHTML.trim() === ''){
-            try{ footerHolder.innerHTML = await loadHtml('../includes/footer.html'); }catch(e){console.error('footer fetch failed', e)}
+            try{ footerHolder.innerHTML = await loadHtml('includes/footer.html'); }catch(e){console.error('footer fetch failed', e)}
           }
 
           try{
-            const scriptsText = await loadHtml('../includes/scripts.html');
+            const scriptsText = await loadHtml('includes/scripts.html');
             const doc = new DOMParser().parseFromString(scriptsText, 'text/html');
             const scripts = Array.from(doc.querySelectorAll('script'));
             for (const s of scripts){

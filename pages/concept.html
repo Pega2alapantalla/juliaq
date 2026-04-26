@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <base href="/juliaq/">
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Concept — Julia Quintana</title>
@@ -33,22 +34,22 @@
     async function insertIncludes(){
       const headerHolder = document.getElementById('include-header');
       if (headerHolder && headerHolder.innerHTML.trim() === ''){
-        try{ headerHolder.innerHTML = await loadHtml('../includes/header.html'); }catch(e){console.error('header fetch failed', e)}
+        try{ headerHolder.innerHTML = await loadHtml('includes/header.html'); }catch(e){console.error('header fetch failed', e)}
         if (headerHolder.innerHTML.trim() === ''){
-          headerHolder.innerHTML = '<header><a href="/">Home</a></header>';
+          headerHolder.innerHTML = '<header><a href="index.html">Home</a></header>';
         }
       }
 
       const footerHolder = document.getElementById('include-footer');
       if (footerHolder && footerHolder.innerHTML.trim() === ''){
-        try{ footerHolder.innerHTML = await loadHtml('../includes/footer.html'); }catch(e){console.error('footer fetch failed', e)}
+        try{ footerHolder.innerHTML = await loadHtml('includes/footer.html'); }catch(e){console.error('footer fetch failed', e)}
         if (footerHolder.innerHTML.trim() === ''){
           footerHolder.innerHTML = '<footer><p>&copy; 2026 Julia Quintana</p></footer>';
         }
       }
 
       try{
-        const scriptsText = await loadHtml('../includes/scripts.html');
+        const scriptsText = await loadHtml('includes/scripts.html');
         const doc = new DOMParser().parseFromString(scriptsText, 'text/html');
         const scripts = Array.from(doc.querySelectorAll('script'));
         for (const s of scripts){

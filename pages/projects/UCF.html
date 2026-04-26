@@ -1,102 +1,86 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
+  <base href="/juliaq/">  
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Julia Quintana</title>
-    <link rel="stylesheet" href="/styles.css">
-    <link rel="stylesheet" href="/includes/lightbox2-2.12.0/dist/css/lightbox.css">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="includes/lightbox2-2.12.0/dist/css/lightbox.css">
     <link href="https://db.onlinewebfonts.com/c/ed1df0d539f369028a8437b87f74b004?family=Ranade+Light" rel="stylesheet"> 
     <link href="https://db.onlinewebfonts.com/c/76934e6001ec75dd937de0a2b37c3f8b?family=Ranade+Medium" rel="stylesheet" type="text/css"/>
 </head>
 <body>
     <div class="header-rrsslogos" >
-            <a href="/img/img1.png" target="_blank" rel="noopener">
-                <img src="/img/logos/pdf_button.png" alt="pdf portfolio" class="rss-logo">
+            <a href="img/img1.png" target="_blank" rel="noopener">
+                <img src="img/logos/pdf_button.png" alt="pdf portfolio" class="rss-logo">
             </a>
             <a href="https://www.artstation.com/juliaquintana" target="_blank" rel="noopener">
-                <img src="/img/logos/artstation_logo.png" alt="ArtStation logo" class="rss-logo">
+                <img src="img/logos/artstation_logo.png" alt="ArtStation logo" class="rss-logo">
             </a>
             <a href="https://www.instagram.com/juliaquintana.art/" target="_blank" rel="noopener">
-                <img src="/img/logos/instagram-circle.png" alt="Instagram logo" class="rss-logo">
+                <img src="img/logos/instagram-circle.png" alt="Instagram logo" class="rss-logo">
             </a>
             <a href="mailto:juliaquintanacabeza21@gmail.com" target="_blank" rel="noopener">
-                <img src="/img/logos/mail_logo.png" alt="Email logo" class="rss-logo">
+                <img src="img/logos/mail_logo.png" alt="Email logo" class="rss-logo">
             </a>
-        </div>
-    <header class="">
-        <a href="/" class="">
-            <img src="/img/cropped-Logo.png" alt="Logo de Julia Quintana" id="logo" class="header-logo" > 
-        </a>
-       
+        <body>
+            <div id="include-header"></div>
 
-    <nav id="navbar">
-        <button id="hamburger" class="hamburger" aria-label="Toggle navigation menu">
-            <span class="hamburger-line"></span>
-            <span class="hamburger-line"></span>
-            <span class="hamburger-line"></span>
-        </button>
-        <ul class="nav-menu">
-            <li class="nav-item dropdown">
-                <a href="/pages/illustration.html">Illustration</a>
-                <!-- <button class="dropdown-toggle" aria-label="Toggle Illustration submenu">▼</button>
-                <ul class="dropdown-menu">
-                    <li><a href="/illustration-1.html">Printmaking</a></li>
-                    <li><a href="/illustration-2.html">Painting</a></li>
-                    <li><a href="/illustration-3.html">Lithography</a></li>
-                    <li><a href="/illustration-1.html">Screen painting</a></li>
-                    <li><a href="/illustration-2.html">Digital art</a></li>
-                </ul> -->
-            </li>
-            <li class="nav-item dropdown">
-                <a href="/pages/concept.html">Concept</a>
-                <!-- <button class="dropdown-toggle" aria-label="Toggle Concept submenu">▼</button>
-                <ul class="dropdown-menu">
-                    <li><a href="/concept-1.html">Concept 1</a></li>
-                    <li><a href="/concept-2.html">Concept 2</a></li>
-                    <li><a href="/concept-3.html">Concept 3</a></li>
-                </ul> -->
-            </li>
-            <li class="nav-item dropdown">
-                <a >Projects</a>
-                <!-- <a href="/pages/projects.html" >Projects</a> -->
-                <button class="dropdown-toggle" aria-label="Toggle Projects submenu">▼</button>
-                <ul class="dropdown-menu">
-                    <li><a href="/pages/projects/UCF.html">UCAnFly</a></li>
-                    <li><a href="/pages/projects/Royal_Bliss.html">Royal Bliss</a></li>
-                </ul>
-            </li>
-            <li class="nav-item dropdown">
-                <a href="/pages/sketches.html">Sketches</a>
-            </li>
-            <li class="nav-item dropdown">
-                <a href="/pages/about.html">About me!</a>
-            </li>
-            <li class="nav-item dropdown">
-                <a href="/pages/contact.html">Contact</a>
-            </li>
-        </ul>
-        
-         
+            <main>
+                <!-- Project page content retained here -->
+            </main>
 
+            <div id="include-footer"></div>
 
-    </nav>
-    </header>
+            <script>
+            (function(){
+              async function loadHtml(url){
+                const res = await fetch(url, {cache: 'no-store'});
+                if (!res.ok) throw new Error('Failed to load ' + url + ' (' + res.status + ')');
+                return await res.text();
+              }
 
+              async function insertIncludes(){
+                const headerHolder = document.getElementById('include-header');
+                if (headerHolder && headerHolder.innerHTML.trim() === ''){
+                  try{ headerHolder.innerHTML = await loadHtml('includes/header.html'); }catch(e){console.error(e)}
+                }
 
+                const footerHolder = document.getElementById('include-footer');
+                if (footerHolder && footerHolder.innerHTML.trim() === ''){
+                  try{ footerHolder.innerHTML = await loadHtml('includes/footer.html'); }catch(e){console.error(e)}
+                }
 
+                try{
+                  const scriptsText = await loadHtml('includes/scripts.html');
+                  const doc = new DOMParser().parseFromString(scriptsText, 'text/html');
+                  const scripts = Array.from(doc.querySelectorAll('script'));
+                  for (const s of scripts){
+                    if (s.src){
+                      await new Promise((res, rej) => {
+                        const sc = document.createElement('script');
+                        sc.src = s.src;
+                        sc.async = false;
+                        sc.onload = res; sc.onerror = rej;
+                        document.body.appendChild(sc);
+                      });
+                    } else {
+                      const sc = document.createElement('script');
+                      sc.textContent = s.textContent;
+                      document.body.appendChild(sc);
+                    }
+                  }
+                } catch(e){ console.error('Error loading shared scripts', e) }
+              }
 
+              if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', insertIncludes); else insertIncludes();
+            })();
+            </script>
 
-
-
-
-
-
-    <footer>
-        <p>&copy; 2026 Pablo C. &amp; Julia Q.</p>
-    </footer>
-    <div id="lightbox" class="hidden">
-        <span id="close">&times;</span>
+        </body>
+        </html>
         <img id="lightbox-img" src="">
     </div>
 
