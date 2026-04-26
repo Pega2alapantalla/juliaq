@@ -33,12 +33,23 @@
           <div class="swiper-slide">
             <img src="img/img3.png" alt="Descripción de la obra">
           </div>
+          <div class="swiper-slide">
+            <img src="img/img4.png" alt="Descripción de la obra">
+          </div>
+          <div class="swiper-slide">
+            <img src="img/img1.png" alt="Descripción de la obra">
+          </div>
         </div>
       </div>
       <div class="swiper-button-next"></div>
       <div class="swiper-button-prev"></div>
 
       <div class="swiper-pagination"></div>
+
+
+      <div style="text-align:center; margin: 40px 0;">
+            <img src="img/miau.png" alt="JQ signature" width="300" height="287" style="max-width:100%; height:auto;">
+        </div>
 
 
 
@@ -106,12 +117,32 @@
             return;
           }
           new Swiper('.mySwiper', {
-                loop: true,
-                autoplay: { delay: 5000 },
-                pagination: { el: '.swiper-pagination', clickable: true },
-                navigation: { nextEl: '.swiper-button-next', prevEl: '.swiper-button-prev' },
-                effect: 'fade',
-                fadeEffect: { crossFade: true },
+            autoplay: {
+            delay: 4000,                // 4000 milisegundos = 4 segundos
+            disableOnInteraction: false, // ¡IMPORTANTE! Si el usuario toca el carrusel, 
+                                     // el auto-play NO se detendrá para siempre.
+            pauseOnMouseEnter: true,     // El carrusel se para si el ratón está encima 
+                                     // (ideal para que Julia pueda ver una obra con calma)
+
+    // Añade esto para que la transición sea fluida
+            speed: 800,
+            }, // Velocidad de la transición en ms (0.8 segundos de movimiento)
+            // PARÁMETROS CLAVE:
+            slidesPerView: 1.2,      // Muestra una imagen y un trozo de la siguiente
+            spaceBetween: 10,        // Separación en píxeles entre fotos
+            centeredSlides: false,    // Empieza pegado a la izquierda
+            
+            // Adaptabilidad (Responsive)
+            breakpoints: {
+                640: { slidesPerView: 2.2 },  // En tablets se ven 2 y pico
+                1024: { slidesPerView: 4 }     // En PC se ven 4 como en tu imagen
+            },
+
+            loop: true,
+            navigation: {
+                nextEl: '.swiper-button-next',
+                prevEl: '.swiper-button-prev',
+            },
             });
         }
       }
