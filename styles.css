@@ -93,7 +93,7 @@ header.fixed, .site-header.fixed {
 
 .site-header.is-fixed {
     box-sizing: border-box;
-    padding: 2% 5%; /* match normal header padding */
+    padding: 1% 5%; /* match normal header padding */
     max-width: 100vw;
     overflow: visible;
 }
@@ -215,6 +215,10 @@ header.fixed, .site-header.fixed {
 .site-header.shrink .header-logo {
     --logo-scale: 0.78;
 }
+
+.site-header.shrink #navbar {
+    transform: translateY(-20px);
+}
 .site-header .header-logo {
     transform-origin: left bottom;
     transform: scale(var(--logo-scale, 1));
@@ -232,7 +236,7 @@ header.fixed, .site-header.fixed {
 
 /* Make navbar remain aligned: reduce navbar height slightly when shrink */
 .site-header.shrink #navbar {
-    height: 40px;
+    height: 20px;
 }
 
 /* Hover debe aumentar un 10% respecto al valor actual de --logo-scale
@@ -248,9 +252,9 @@ header.fixed, .site-header.fixed {
     grid-template-columns: 1fr auto;
     grid-template-rows: auto auto;
     column-gap: 24px;
-    row-gap:25%;
+    row-gap:37%;
     align-items: start;
-    padding: 2% 5%;
+    padding: 1% 5%;
 }
 
 .logo-link {
@@ -274,7 +278,9 @@ header.fixed, .site-header.fixed {
 /* header layout placements for grid */
 /* Ensure logo spans the full left column (both rows) */
 .header-logo { grid-column: 1; grid-row: 1 / span 2; justify-self: start; }
-#navbar { grid-column: 2; grid-row: 2; justify-self: end; }
+#navbar { grid-column: 2; grid-row: 2; justify-self: end; 
+    transition: transform 0.2s ease-in-out;
+}
 
 
 .rss-logo {
