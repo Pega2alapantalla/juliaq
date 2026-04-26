@@ -830,8 +830,10 @@ footer{
 
 
 .swiper {
-  width: 100%;
-  height: 80vh; /* Ajusta la altura (80% del visor) */
+        margin-top: 5%;
+        width: 100%;
+        /* min-height: 60vh; Permite que la sección tenga al menos 60vh pero pueda crecer */
+        height: 60vh; /* Deja que la altura se ajuste al contenido (las imágenes) */
 }
 
 .swiper-slide {
@@ -844,7 +846,7 @@ footer{
   display: block;
   width: 100%;
   height: 100%;
-  object-fit: cover; /* Clave: La imagen llena el espacio sin deformarse */
+  object-fit: contain; /* Clave: La imagen llena el espacio sin deformarse */
 }
 
 /* Personaliza el color de Julia para los controles */
