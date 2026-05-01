@@ -393,6 +393,8 @@ header.fixed, .site-header.fixed {
 
 .nav-illustration{
     display: flex;
+    padding-top: 3rem;
+    padding-bottom: 2rem;
 
 }
 .nav-menu.illustration-categories {
