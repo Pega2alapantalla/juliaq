@@ -84,6 +84,27 @@ header.fixed, .site-header.fixed {
     display: block;
     width: 100%;
     height: 0px; /* JS will set the height to match header */
+    transition: height 0.22s ease; /* smoother layout shift when JS toggles */
+    pointer-events: none;
+    box-sizing: border-box;
+}
+
+/* Prevent clipping of transformed/scaled children (logo, images) */
+header,
+.site-header,
+header.fixed,
+.site-header.is-fixed {
+    overflow: visible;
+}
+
+/* Ensure logo area doesn't clip the image when scaled */
+.header-logo {
+    overflow: visible;
+}
+
+/* Restore original shrink padding to preserve appearance */
+.site-header.shrink {
+    padding: 0.2% 5%;
 }
 
 /* Ensure fixed header spans the viewport and isn't clipped by parent boxes */
@@ -205,6 +226,11 @@ header.fixed, .site-header.fixed {
     --logo-scale: 1;
     transform: scale(var(--logo-scale));
     transition: filter 0.4s  ease-in-out, transform 0.2s ease-in-out, height 0.4s ease-in-out;
+
+    /* Ensure the image element itself can't render larger than intended */
+    display: inline-block;
+    width: auto;
+    max-height: 90px;
 }
 
 /* Shrink visual state: logo smaller, header thinner, rrss logos hidden */
@@ -952,6 +978,6 @@ footer{
 
 /* Personaliza el color de Julia para los controles */
 :root {
-  --swiper-navigation-color: #fff;
-  --swiper-pagination-color: #fff;
+  --swiper-navigation-color: royalblue;
+  --swiper-pagination-color: royalblue;
 }
