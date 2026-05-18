@@ -976,6 +976,14 @@ footer{
   object-fit: contain; /* Clave: La imagen llena el espacio sin deformarse */
 }
 
+.swipper-fade {
+    mask-image: linear-gradient(to right, 
+        rgba(0, 0, 0, 0) 0%, 
+        rgba(0, 0, 0, 1) 5%, 
+        rgba(0, 0, 0, 1) 95%, 
+        rgba(0, 0, 0, 0) 100%);
+}
+
 /* Personaliza el color de Julia para los controles */
 :root {
   --swiper-navigation-color: royalblue;
