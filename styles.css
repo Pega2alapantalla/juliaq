@@ -217,7 +217,7 @@ header.fixed,
 /* Header shrink rules removed to keep header stable */
 .header-logo {
     text-align: left;
-    height: 90px; /* Ajusta el tamaño del logo */
+    height: 120px; /* Ajusta el tamaño del logo */
     margin-left: 0;
     /* Make logo span both rows and align to bottom-left of the left column */
     grid-column: 1;
@@ -230,7 +230,6 @@ header.fixed,
     /* Ensure the image element itself can't render larger than intended */
     display: inline-block;
     width: auto;
-    max-height: 90px;
 }
 
 /* Shrink visual state: logo smaller, header thinner, rrss logos hidden */
@@ -969,6 +968,7 @@ footer{
         /* min-height: 60vh; Permite que la sección tenga al menos 60vh pero pueda crecer */
         height: 60vh; /* Deja que la altura se ajuste al contenido (las imágenes) */
         margin-bottom: 5%;
+        
 }
 
 .swiper-slide {
@@ -991,6 +991,13 @@ footer{
         rgba(0, 0, 0, 1) 95%, 
         rgba(0, 0, 0, 0) 100%);
 }
+
+.centered-rrss{
+    padding-top: 2vh;
+    display: flex;
+    justify-content: center;
+}
+
 
 /* Personaliza el color de Julia para los controles */
 :root {
