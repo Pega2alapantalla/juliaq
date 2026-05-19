@@ -996,4 +996,5 @@ footer{
 :root {
   --swiper-navigation-color: royalblue;
   --swiper-pagination-color: royalblue;
+  --swiper-navigation-sides-offset: 2%; /* Ajusta la distancia de los botones del borde */
 }
