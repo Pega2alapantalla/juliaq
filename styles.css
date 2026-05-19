@@ -955,6 +955,13 @@ footer{
 }
 
 
+.container-carrousel {
+    position: relative;
+    width: 90%;
+    overflow: hidden;
+    padding-left: 5%;
+    padding-right: 5%;
+}
 
 .swiper {
         margin-top: 5%;
