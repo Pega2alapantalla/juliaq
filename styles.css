@@ -235,7 +235,7 @@ header.fixed,
 /* Shrink visual state: logo smaller, header thinner, rrss logos hidden */
 .site-header.shrink {
     /* reduce vertical padding when shrinked: keep horizontal padding */
-    padding: 0.2vh 5%;
+    padding: 3vh 5%;
     row-gap: 0; /* reduce gap to prevent pushing navbar down when shrinked */
 }
 .site-header.shrink .header-logo {
