@@ -780,6 +780,14 @@ header.fixed,
     align-items: flex-start;
 }
 
+.container-detailed {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 40px;
+    padding: 40px 0;
+}
+
 .gallery.vertical {
     flex-direction: column;
     align-items: center;
@@ -794,6 +802,7 @@ header.fixed,
 .gallery-item {
     flex: 0 0 calc(25% - 15px);
     width: calc(50% - 15px);
+    width: auto;
     box-sizing: border-box;
 }
 
@@ -841,12 +850,15 @@ header.fixed,
 }
 
 .description{
+    position: sticky;
+    top: 20%;
     max-width: 33vw;
     padding: 20px;
     background-color: white;
     border-radius: 10px;
     box-shadow: 0 4px 15px rgba(0,0,0,0.1);
     text-align: justify;  
+    align-self: self-start;
 }
 .description .title {
     font-family: "Ranade Medium", sans-serif;
