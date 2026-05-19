@@ -144,9 +144,16 @@ document.querySelectorAll('.dropdown-toggle').forEach(button => {
     function update() {
         ticking = false;
         const header = document.querySelector('header.site-header');
+        const navMenu = header ? header.querySelector('.nav-menu') : null;
         if (!header) return;
         const sc = window.scrollY || window.pageYOffset;
-        if (sc > THRESHOLD) header.classList.add('shrink'); else header.classList.remove('shrink');
+        if (sc > THRESHOLD) {
+            header.classList.add('shrink');
+            if (navMenu) navMenu.classList.add('shrink');
+        } else {
+            header.classList.remove('shrink');
+            if (navMenu) navMenu.classList.remove('shrink');
+        }
     }
 
     function onScroll(){
