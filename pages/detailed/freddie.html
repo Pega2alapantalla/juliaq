@@ -131,26 +131,45 @@
         } catch(e){ console.error('Error loading scripts', e) }
 
         // Initialize Fancybox (if available)
-        try {
-          if (window.Fancybox) {
-            Fancybox.bind('[data-fancybox]', {
-              Carousel: {
-                Thumbs: false,
-                Toolbar: {
-                  display: {
-                    left: [],
-                    middle: [],
-                    right: ["zoom", "close"]
-                  }
-                }
-              },
-              Panzoom: {
-                maxScale: 5
-              },
-              dragToClose: false
-            });
-          }
-        } catch(e) { console.warn('Fancybox init failed', e) }
+try {
+  if (window.Fancybox) {
+    Fancybox.bind('[data-fancybox="gallery"]', {
+      // 1. Configuración de imágenes (Va en la raíz, NO dentro de Carousel)
+      Images: { // ¡Ojo! Es "Images" en plural para la configuración global
+        fit:"contain",
+        maxScale: 500,
+      },
+      
+      // 2. Configuración de la barra de herramientas (También en la raíz)
+      Toolbar: {
+        display: {
+          left: [],
+          middle: [],
+          right: ["iterateZoom", "close"]
+        }
+      },
+      
+      // 3. El motor de Zoom (En la raíz)
+      Panzoom: {
+        maxScale: 500
+      },
+      
+      // 4. Desactivar arrastrar para cerrar (En la raíz)
+      dragToClose: false,
+      
+      // 5. Si quieres desactivar las miniaturas, se hace a través de su propio objeto nativo
+      Thumbs: {
+        autoStart: false // Esto evita que se abran las miniaturas por defecto
+      }
+    });
+  
+      console.log('Fancybox initialized with custom config');}
+  else {
+    console.warn('Fancybox is not available on window; skipping initialization');
+  }
+} catch(e) { 
+  console.warn('Fancybox init failed', e); 
+}
 
         // 4. Inicializar Swiper después de insertar scripts and cargar imágenes
         try {
