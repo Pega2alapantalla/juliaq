@@ -489,6 +489,12 @@ header.fixed,
     .nav-illustration{
         height: 0px !important;
     }
+    .site-header.shrink #navbar {
+        transform: none;
+    }
+    .container-detailed{
+        padding-top: 100px !important;
+    }
 }
 
 .nav-menu.illustration-categories {
@@ -604,7 +610,8 @@ header.fixed,
     #navbar {
         gap: 12px;
         max-width: calc(100% - 140px);
-        background: none;
+        height: 0px !important;
+        display: block; /* JS will set this to match header height when fixed */
     }
     .hamburger {
         display: flex;
@@ -964,6 +971,20 @@ header.fixed,
     overflow: hidden;
 }
 
+
+@media (max-width: 1200px) {
+    .container-detailed {
+        flex-direction: column;
+        gap: 20px;
+    }
+    .container-detailed .description{
+        order: -1;
+        position: relative;
+        align-self: center;
+        max-width: 50%;
+    }
+    
+}
 
 @media (max-width: 900px) {
     .gallery > a,
