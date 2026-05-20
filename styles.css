@@ -82,6 +82,7 @@ header.fixed, .site-header.fixed {
 
 
 
+
 #header-placeholder {
     display: block;
     width: 100%;
@@ -94,9 +95,12 @@ header.fixed, .site-header.fixed {
 @media (max-width: 1734px) {
     #header-placeholder {
         height: 0px !important;
-        position: fixed;
+        position: fixedt;
         z-index: 1; /* JS will set this to match header height when fixed */
     }
+    .site-header.is-fixed{
+    padding: 10px 5% !important;
+    row-gap: 00px;}
 }
 
 /* Prevent clipping of transformed/scaled children (logo, images) */
@@ -480,6 +484,13 @@ header.fixed,
     padding-bottom: 2rem;
 
 }
+
+@media (max-width: 1734px) {
+    .nav-illustration{
+        height: 0px !important;
+    }
+}
+
 .nav-menu.illustration-categories {
     position: relative;
     padding-left: 100px;
@@ -951,6 +962,16 @@ header.fixed,
     opacity: 1;
     transform: scale(1);
     overflow: hidden;
+}
+
+
+@media (max-width: 900px) {
+    .gallery > a,
+    .gallery-item {
+        flex: 0 0 calc(50% - 15px);
+        width: calc(50% - 15px);
+    }
+    
 }
 
 /* Fade/scale out while keeping layout space, then collapse */
