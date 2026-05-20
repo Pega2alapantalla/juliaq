@@ -237,6 +237,7 @@ header.fixed,
     /* reduce vertical padding when shrinked: keep horizontal padding */
     padding: 3vh 5%;
     row-gap: 0; /* reduce gap to prevent pushing navbar down when shrinked */
+    padding-top: 0px;
 }
 .site-header.shrink .header-logo {
     --logo-scale: 0.78;
