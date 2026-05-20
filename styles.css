@@ -80,6 +80,8 @@ header.fixed, .site-header.fixed {
     background: white;
 }
 
+
+
 #header-placeholder {
     display: block;
     width: 100%;
@@ -87,6 +89,14 @@ header.fixed, .site-header.fixed {
     transition: height 0.22s ease; /* smoother layout shift when JS toggles */
     pointer-events: none;
     box-sizing: border-box;
+}
+
+@media (max-width: 1734px) {
+    #header-placeholder {
+        height: 0px !important;
+        position: fixed;
+        z-index: 1; /* JS will set this to match header height when fixed */
+    }
 }
 
 /* Prevent clipping of transformed/scaled children (logo, images) */
@@ -319,6 +329,50 @@ header.fixed,
     transform: scale(1.2);
 }
 
+/* Ensure widths <= 900px use the same hamburger overlay as smaller sizes */
+@media (max-width: 900px) {
+    .menu-rrss {
+        display: flex;
+        gap: 12px;
+        justify-content: center;
+        margin-bottom: 8px;
+        width: 100%;
+        padding-top: 10vh;
+        flex-direction: row;
+        align-items: center;
+    }
+    .nav-menu {
+        position: fixed;
+        top: 10vh;
+        left: 0;
+        width: 100%;
+        height: calc(90vh);
+        background: rgba(255,255,255,0.98);
+        flex-direction: column;
+        padding: 20px 20px;
+        box-shadow: none;
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        gap: 12px;
+        transform: translateY(-100%);
+        opacity: 0;
+        pointer-events: none;
+        transition: transform 0.35s ease, opacity 0.35s ease;
+        z-index: 2000;
+    }
+    #hamburger {
+        position: fixed;
+        top: 14px;
+        right: 18px;
+        z-index: 2100;
+        background: rgba(255,255,255,0.95);
+        border-radius: 6px;
+        padding: 8px;
+    }
+    body.nav-open { overflow: hidden; }
+}
+
 @media (max-width: 768px) {
     .site-header {
         grid-template-columns: 1fr;
@@ -342,7 +396,6 @@ header.fixed,
         grid-row: 3;
         justify-self: center;
     }
-    .rss-logo { width: 24px; height: 24px; }
 }
 
 
@@ -522,7 +575,7 @@ header.fixed,
   margin-top: 0px; /* optional, if gap causes flicker, use 0 */
 }
 
-@media (max-width: 1024px) {
+@media (max-width: 1734px) {
     /* Ajustes generales para tablets y pantallas medianas */
     header {
         height: auto;
@@ -540,6 +593,7 @@ header.fixed,
     #navbar {
         gap: 12px;
         max-width: calc(100% - 140px);
+        background: none;
     }
     .hamburger {
         display: flex;
@@ -637,18 +691,18 @@ header.fixed,
   }
     .nav-menu {
         position: fixed;
-        top: 0;
+        top: 10vh; /* leave 10% above */
         left: 0;
         width: 100%;
-        height: 100vh;
+        height: calc(90vh); /* occupy remaining viewport */
         background: rgba(255,255,255,0.98);
         flex-direction: column;
-        padding: 80px 20px;
+        padding: 20px 20px; /* small padding so items start near top */
         box-shadow: none;
         display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: 18px;
+        align-items: center; /* center horizontally like larger mobile styles */
+        justify-content: flex-start; /* start vertically at top */
+        gap: 12px;
         transform: translateY(-100%);
         opacity: 0;
         pointer-events: none;
@@ -664,7 +718,7 @@ header.fixed,
     /* Make hamburger float above the overlay so it can close it */
     #hamburger {
         position: fixed;
-        top: 14px;
+        top: 14px; /* standard position at top */
         right: 18px;
         z-index: 2100;
         background: rgba(255,255,255,0.95);
@@ -675,7 +729,6 @@ header.fixed,
     /* Larger, centered nav links for the full-screen menu */
     .nav-menu a {
         font-size: 22px;
-        padding: 12px 10px;
         display: block;
         text-align: center;
     }
@@ -684,24 +737,35 @@ header.fixed,
     body.nav-open {
         overflow: hidden;
     }
-  .nav-item {
-    width: 100%;
-    display: block;
-  }
+    .nav-item {
+        width: auto; /* keep same layout as larger widths */
+        display: block;
+    }
   .nav-item > a,
   .nav-item > .dropdown-toggle {
     display: inline-block;
         vertical-align: middle;
   }
-  .nav-item > a {
-    padding: 15px 20px;
-    text-align: left;
-  }
+    .nav-item > a {
+        padding: 10px 20px;
+        text-align: center; /* keep text centered like on larger screens */
+        width: auto;
+    }
   .dropdown-toggle {
     position: absolute;
     right: 10px;
     display:block;
   }
+
+    /* Ensure rrss icons stay in a row on small widths */
+    .menu-rrss {
+        display: flex;
+        flex-direction: row;
+        gap: 12px;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+    }
   .dropdown-menu {
     max-height: 0px;
     position: static;
@@ -745,7 +809,6 @@ header.fixed,
     }
     #navbar a {
         font-size: 16px;
-        padding: 12px 10px;
     }
     .about-text-content h1 {
         font-size: 1.8rem;
@@ -797,6 +860,72 @@ header.fixed,
 .gallery.vertical a img {
     width: 100%;
     max-width: 600px; /* Limita el ancho máximo de las imágenes en la galería vertical */
+}
+
+/* --- Mostrar logos dentro del menú hamburguesa y unificar comportamiento móvil/tablet --- */
+.menu-rrss {
+    display: none; /* oculto por defecto en escritorio */
+}
+.menu-rrss .rss-logo {
+    height: 28px;
+}
+
+/* Forzar comportamiento de menú tipo overlay hasta 1024px (incluye 834px) */
+@media (max-width: 1734px) {
+    /* esconder los logos del header superior y usar los del menú */
+    .header-rrsslogos {
+        display: none;
+    }
+    .menu-rrss {
+        display: flex;
+        gap: 12px;
+        justify-content: center;
+        margin-bottom: 8px;
+        width: 100%;
+        padding-top: 10vh;
+        flex-direction: row; /* ensure row for all sizes <=1024px */
+        align-items: center;
+    }
+    .menu-rrss .rss-logo { height: 28px; }
+
+    /* aplicar el overlay de menú (igual que en móviles) para tablets y pantallas menores */
+    .nav-menu {
+        position: fixed;
+        top: 10vh; /* leave 10% above */
+        left: 0;
+        width: 100%;
+        height: calc(90vh); /* occupy remaining viewport */
+        background: rgba(255,255,255,0.98);
+        flex-direction: column;
+        padding: 20px 20px; /* small padding so items start near top */
+        box-shadow: none;
+        display: flex;
+        align-items: center; /* center horizontally like mobile */
+        justify-content: flex-start; /* start at top vertically */
+        gap: 12px;
+        transform: translateY(-100%);
+        opacity: 0;
+        pointer-events: none;
+        transition: transform 0.35s ease, opacity 0.35s ease;
+        z-index: 2000;
+    }
+    #navbar.open .nav-menu {
+        transform: translateY(0);
+        opacity: 1;
+        pointer-events: auto;
+    }
+    /* mantener el botón hamburguesa encima del overlay */
+    #hamburger {
+        position: fixed;
+        top: 14px;
+        right: 18px;
+        z-index: 2100;
+        background: rgba(255,255,255,0.95);
+        border-radius: 6px;
+        padding: 8px;
+    }
+    /* evitar scroll de fondo cuando el menú está abierto */
+    body.nav-open { overflow: hidden; }
 }
 
 .gallery > a,
@@ -898,27 +1027,25 @@ footer{
 
 
 @media (max-width: 900px) {
-    .gallery {
-        padding-left: 40px;
-        padding-right: 40px;
-        justify-content: center;
-    }
-    .gallery > a,
-    .gallery-item {
-        flex: 0 0 calc(33.333% - 15px);
-        width: calc(33.333% - 15px);
-    }
-}
-@media (max-width: 600px) {
-    .gallery {
-        padding-left: 24px;
-        padding-right: 24px;
-        justify-content: center;
-    }
-    .gallery > a,
-    .gallery-item {
-        flex: 0 0 calc(50% - 15px);
-        width: calc(50% - 15px);
+    .nav-menu {
+        position: fixed;
+        top:0px; /* leave 10% above */
+        left: 0;
+        width: 100%;
+        height: calc(100vh);
+        background: rgba(255,255,255,0.98);
+        flex-direction: column;
+        padding: 20px 20px; /* top padding small so items start near the top */
+        box-shadow: none;
+        display: flex;
+        align-items: center; /* center horizontally */
+        justify-content: flex-start;
+        gap: 12px;
+        transform: translateY(-100%);
+        opacity: 0;
+        pointer-events: none;
+        transition: transform 0.35s ease, opacity 0.35s ease;
+        z-index: 2000;
     }
 }
 @media (max-width: 400px) {
