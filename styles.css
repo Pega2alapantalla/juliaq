@@ -446,7 +446,7 @@ header.fixed,
 #navbar a {
   font-family: "Ranade Light",'sans-serif';
   font-size: 23px;
-  color: black;
+  color: royalblue;
   text-decoration: none;
   transition: color 0.2s ease, font-size 0.2s ease, filter 0.2s ease;
 }
@@ -477,6 +477,7 @@ header.fixed,
   text-align: left;
   transform: translateY(-30px);
 }
+
 .nav-menu.shrink{
     transform: translateY(25px);
 }
