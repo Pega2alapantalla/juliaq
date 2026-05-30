@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <base href="/juliaq/">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Julia Quintana</title>
+    <link rel="stylesheet" href="styles.css">
+    <!-- Lightbox CSS removed (Fancybox used) -->
+    <link href="https://db.onlinewebfonts.com/c/ed1df0d539f369028a8437b87f74b004?family=Ranade+Light" rel="stylesheet"> 
+    <link href="https://db.onlinewebfonts.com/c/76934e6001ec75dd937de0a2b37c3f8b?family=Ranade+Medium" rel="stylesheet" type="text/css"/>
+    
+  </head>
+  <body>
+    <div id="include-header"></div>
+
+    <section class="about-section">
+      <div class="container fade-in about-grid">
+
+        <div class="about-text-content">
+          <h1>About me</h1>
+
+          <p class="lead">
+            Hi there! I’m <strong>Julia</strong>, a character designer, concept artist and graphic designer based in Spain.
+          </p>
+
+          <div class="about-paragraphs">
+            <p>
+              From a young age, I’ve always been drawn to expressive characters and imaginative worlds. I love creating visuals that feel alive—full of personality, emotion, and small details that tell a story beyond the image. Over time, this passion has evolved into a focus on character design and storytelling, exploring the balance between playful, colorful aesthetics and emotional depth.
+            </p>
+            
+            <h3>Education & Background</h3>
+            <p>
+              I studied <strong>Fine Arts in Seville</strong> and later completed a two-year Master’s in Concept Art and Illustration at the Universal Arts School, which allowed me to refine my skills and expand my artistic approach across different styles and disciplines.
+            </p>
+
+            <h3>Professional Experience</h3>
+            <p>
+              Alongside my artistic practice, I’ve worked as a graphic designer for two years on the <strong>UCAnFly project</strong>, collaborating with the <strong>European Space Agency</strong>. This experience gave me the opportunity to contribute in a multidisciplinary team and apply design in technical and collaborative contexts.
+            </p>
+
+            <p>
+              My work is inspired by animation and stories that blend humor with heartfelt moments. I’m especially interested in creating characters and worlds that feel relatable, expressive, and full of life. Currently, I’m working on my professional portfolio and developing personal projects.
+            </p>
+
+            <blockquote class="personal-note">
+              When I’m not drawing, I enjoy doing crafts, experimenting with materials, and finding inspiration in everyday life and the people around me.
+            </blockquote>
+          </div>
+
+        </div>
+
+        <div class="about-image-content">
+          <img src="/img/picss.jpeg" alt="Julia - Character Designer" class="profile-photo">
+        </div>
+
+      </div>
+    </section>
+
+    <div id="include-footer"></div>
+
+    <script>
+      (function(){
+        async function loadHtml(url){
+          const res = await fetch(url, {cache: 'no-store'});
+          if (!res.ok) throw new Error('Failed to load ' + url + ' (' + res.status + ')');
+          return await res.text();
+        }
+
+        async function insertIncludes(){
+          const headerHolder = document.getElementById('include-header');
+          if (headerHolder && headerHolder.innerHTML.trim() === ''){
+            try{ headerHolder.innerHTML = await loadHtml('../includes/header.html'); }catch(e){console.error('header fetch failed', e)}
+          }
+
+          const footerHolder = document.getElementById('include-footer');
+          if (footerHolder && footerHolder.innerHTML.trim() === ''){
+            try{ footerHolder.innerHTML = await loadHtml('../includes/footer.html'); }catch(e){console.error('footer fetch failed', e)}
+          }
+
+          try{
+            const scriptsText = await loadHtml('../includes/scripts.html');
+            const doc = new DOMParser().parseFromString(scriptsText, 'text/html');
+            const scripts = Array.from(doc.querySelectorAll('script'));
+            for (const s of scripts){
+              if (s.src){
+                await new Promise((res, rej) => {
+                  const sc = document.createElement('script');
+                  sc.src = s.src;
+                  sc.async = false;
+                  sc.onload = res; sc.onerror = rej;
+                  document.body.appendChild(sc);
+                });
+              } else {
+                const sc = document.createElement('script');
+                sc.textContent = s.textContent;
+                document.body.appendChild(sc);
+              }
+            }
+          } catch(e){ console.error('Error loading shared scripts', e) }
+
+          if (window.__afterIncludesCallbacks && Array.isArray(window.__afterIncludesCallbacks)){
+            window.__afterIncludesCallbacks.forEach(fn => { try{ fn(); } catch(e){ console.error(e) } });
+          }
+        }
+
+        if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', insertIncludes); else insertIncludes();
+      })();
+    </script>
+
+  </body>
+</html>

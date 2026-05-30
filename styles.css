@@ -139,7 +139,7 @@ header.fixed,
 .about-section {
     position: relative;
     left: 10px;
-    padding: 80px 0; /* Más espacio arriba y abajo */
+    /* padding: 80px 0; Más espacio arriba y abajo */
     background-color: #ffffff; /* O el color que prefieras */
     overflow: hidden; /* Evita que la foto se salga si es muy grande */
 }
@@ -192,12 +192,14 @@ header.fixed,
 .about-text-content h1 {
     font-size: 2.5rem;
     margin-bottom: 1rem;
-    color: #2c3e50;
+    /* color: #2c3e50; */
+    color: royalblue;
 }
 
 .about-text-content h3 {
     margin-top: 1.5rem;
-    color: #34495e;
+    /* color: #34495e; */
+    color: royalblue;
 }
 
 .about-paragraphs p {
@@ -500,7 +502,7 @@ header.fixed,
 
 .nav-menu.illustration-categories {
     position: relative;
-    padding-left: 100px;
+    padding-left: 5%;
     gap: 20px;
     font-size: 20px;
     color: royalblue;
