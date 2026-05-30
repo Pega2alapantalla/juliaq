@@ -982,11 +982,17 @@ header.fixed,
         order: -1;
         position: relative;
         align-self: center;
-        max-width: 50%;
+        margin-left: 5%;
+        margin-right: 5%;
+        max-width: 100% !important;
+        /* width: 1000px */
+    }
+    .gallery.vertical a img{
+     max-width: 100%;
     }
     
 }
-
+/* 
 @media (max-width: 900px) {
     .gallery > a,
     .gallery-item {
@@ -994,7 +1000,7 @@ header.fixed,
         width: calc(50% - 15px);
     }
     
-}
+} */
 
 /* Fade/scale out while keeping layout space, then collapse */
 .gallery-item.hidden {
