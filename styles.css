@@ -1216,5 +1216,6 @@ footer{
     flex-direction: column;
     justify-content: center;
     /* color: #b32821; */
-    color:#a2231d;
+    /* color:#a2231d; */
+    color: royalblue;
 }
