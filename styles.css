@@ -285,11 +285,15 @@ header.fixed,
 
 /* Hover debe aumentar un 10% respecto al valor actual de --logo-scale
    (si está shrinked se escala 1.1 * 0.8 = 0.88). */
-.header-logo:hover,
-.header-logo.shrink:hover {
-    transform: scale(calc(var(--logo-scale) * 1.1));
-    /* filter: brightness(80%); */
+@media (min-width: 1734px) {
+    .header-logo:hover,
+    .header-logo.shrink:hover {
+        transform: scale(calc(var(--logo-scale) * 1.1));
+        /* filter: brightness(80%); */
+    }
 }
+
+
 
 .site-header {
     display: grid;
