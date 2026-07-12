@@ -923,7 +923,7 @@ header.fixed,
         height: calc(90vh); /* occupy remaining viewport */
         background: rgba(255,255,255,0.98);
         flex-direction: column;
-        padding: 20px 20px; /* small padding so items start near top */
+        /* padding: 20px 20px; small padding so items start near top */
         box-shadow: none;
         display: flex;
         align-items: center; /* center horizontally like mobile */
