@@ -992,6 +992,7 @@ header.fixed,
         order: -1;
         position: relative;
         align-self: center;
+        left: auto;
         margin-left: 5%;
         margin-right: 5%;
         max-width: 100% !important;
