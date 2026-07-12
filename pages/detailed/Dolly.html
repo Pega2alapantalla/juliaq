@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <base href="/juliaq/">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Julia Quintana</title>
+    <link rel="stylesheet" href="styles.css">
+    <!-- Lightbox CSS removed (Fancybox used) -->
+    <link href="https://db.onlinewebfonts.com/c/ed1df0d539f369028a8437b87f74b004?family=Ranade+Light" rel="stylesheet"> 
+    <link href="https://db.onlinewebfonts.com/c/76934e6001ec75dd937de0a2b37c3f8b?family=Ranade+Medium" rel="stylesheet" type="text/css"/>
+    <script src="includes/ui-6.1.13/dist/fancybox/fancybox.umd.js"></script>
+    <link rel="stylesheet" href="includes/ui-6.1.13/dist/fancybox/fancybox.css" />
+</head>
+<body>
+    <div id="include-header"></div>
+    <!-- <nav class="nav-illustration" aria-label="Illustration categories">
+        <ul class="nav-menu illustration-categories">
+            <li class="nav-item active " data-filter="all"> All </li>
+            <li class="nav-item " data-filter="printmaking"> Printmaking </li>
+            <li class="nav-item" data-filter="painting"> Painting </li>
+            <li class="nav-item" data-filter="lithography"> Lithography </li>
+            <li class="nav-item" data-filter="screen-painting"> Screen painting </li>
+            <li class="nav-item" data-filter="digital-art"> Digital art </li>
+        </ul>
+    </nav>
+
+ -->
+
+
+
+
+<!-- 
+    <main>
+        <section id="gallery" class="gallery fade-in">
+            <div class="gallery-item" data-category="painting">
+                <img src="/img/img1.png" alt="Painting 1">
+            </div>
+            
+            <div class="gallery-item" data-category="digital-art">
+                <img src="/img/img2.png" alt="Digital Art 1">
+            </div>
+        </section>
+    </main> -->
+
+
+    <main>
+        <div id="gallery vertical" class="gallery vertical" style="padding-right: 40%;">
+                        <a href="/juliaq/img/sketches/Dolly/Ilustración_sin_título 21.jpg" data-fancybox="gallery">
+                <img src="/juliaq/img/sketches/Dolly/Ilustración_sin_título 21.jpg" alt="Gallery image 1" />
+            </a>
+
+            
+        </div>
+                <div id="Description" class="description fade-in" style="position: fixed; top: 40%; left: 60%;">
+            <h2 class="title">"Dolly" the cow (18/08/2025)</h2>
+            
+                        <p>  </p>
+            <a href="javascript:history.back()" class="back-button">
+                <img src="img/logos/back_button.png" style="width: 30px; height: 30px;" alt="Back"> Back to gallery
+            </a>
+        </div>
+
+
+    </main>
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <!-- footer moved to includes/footer.html -->
+    <div id="include-footer"></div>
+<script type="module">
+      import Swiper from 'https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.mjs'
+      async function loadHtml(url){
+        try {
+          const res = await fetch(url, {cache: 'no-store'});
+          if (!res.ok) return '';
+          return await res.text();
+        } catch(e) { return ''; }
+      }
+
+      async function insertIncludes(){
+        // 1. Inyectar Header
+        const headerHolder = document.getElementById('include-header');
+        if (headerHolder) headerHolder.innerHTML = await loadHtml('includes/header.html');
+
+        // 2. Inyectar Footer
+        const footerHolder = document.getElementById('include-footer');
+        if (footerHolder) footerHolder.innerHTML = await loadHtml('includes/footer.html');
+
+        // 3. Inyectar Scripts externos (Lightbox, JQuery, etc)
+        try {
+          const scriptsText = await loadHtml('includes/scripts.html');
+          const doc = new DOMParser().parseFromString(scriptsText, 'text/html');
+          const scripts = Array.from(doc.querySelectorAll('script'));
+          for (const s of scripts){
+            await new Promise((resolve) => {
+              const sc = document.createElement('script');
+              if (s.src) {
+                const srcAttr = s.getAttribute ? s.getAttribute('src') : s.src;
+                let resolvedSrc = srcAttr;
+                try { resolvedSrc = new URL(srcAttr, document.baseURI).href; } catch(e) { /* leave as-is */ }
+                sc.src = resolvedSrc;
+                sc.async = false;
+                sc.onload = resolve;
+                document.body.appendChild(sc);
+              } else {
+                sc.textContent = s.textContent;
+                document.body.appendChild(sc);
+                resolve();
+              }
+            });
+          }
+        } catch(e){ console.error('Error loading scripts', e) }
+
+        // Initialize Fancybox (if available)
+        try {
+          if (window.Fancybox) {
+            Fancybox.bind('[data-fancybox]', {
+              Carousel: {
+                Thumbs: false,
+                Toolbar: {
+                  display: {
+                    left: [],
+                    middle: [],
+                    right: ["zoom", "close"]
+                  }
+                }
+              },
+              Panzoom: {
+                maxScale: 5
+              },
+              dragToClose: false
+            });
+          }
+        } catch(e) { console.warn('Fancybox init failed', e) }
+
+        // 4. Inicializar Swiper después de insertar scripts and cargar imágenes
+        try {
+          const imgs = Array.from(document.querySelectorAll('.mySwiper img'));
+          await Promise.all(imgs.map(img => img.complete ? Promise.resolve() : new Promise(res => { img.addEventListener('load', res); img.addEventListener('error', res); })));
+        } catch(e) { /* ignore image load errors */ }
+        initSwiper();
+      }
+
+      function initSwiper() {
+        if (document.querySelector('.mySwiper')) {
+          console.log('initSwiper: checking Swiper availability', typeof Swiper, document.querySelectorAll('.swiper-slide').length);
+          if (typeof Swiper === 'undefined') {
+            console.error('Swiper is not available on window; slider will not initialize');
+            return;
+          }
+          new Swiper('.mySwiper', {
+            autoplay: false,
+            // PARÁMETROS CLAVE:
+            slidesPerView: 1.2,      // Muestra una imagen y un trozo de la siguiente
+            spaceBetween: 10,        // Separación en píxeles entre fotos
+            centeredSlides: false,    // Empieza pegado a la izquierda
+            
+            // Adaptabilidad (Responsive)
+            breakpoints: {
+                640: { slidesPerView: 2.2 },  // En tablets se ven 2 y pico
+                1024: { slidesPerView: 4 }     // En PC se ven 4 como en tu imagen
+            },
+
+            loop: true,
+            navigation: {
+                nextEl: '.swiper-button-next',
+                prevEl: '.swiper-button-prev',
+            },
+            });
+        }
+        
+      }
+
+      // Ejecución
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', insertIncludes);
+      } else {
+        insertIncludes();
+      }
+       </script>
+
+
+</body>
+</html>
