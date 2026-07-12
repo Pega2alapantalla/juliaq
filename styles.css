@@ -863,7 +863,6 @@ header.fixed,
 .gallery {
     display: flex;
     flex-wrap: wrap;
-    gap: 15px; /* Espacio entre fotos */
     padding: 20px;
     padding-left: 5%;
     padding-right: 5%;
@@ -961,6 +960,9 @@ header.fixed,
     width: calc(50% - 15px);
     width: auto;
     box-sizing: border-box;
+    margin-right:7.5px;
+    margin-left:7.5px;
+    margin-bottom: 15px;
 }
 
 .gallery a img,
