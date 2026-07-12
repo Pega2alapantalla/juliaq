@@ -32,6 +32,7 @@
 
 <!-- 
     <main>
+        <div id="main detailed" class="container-detailed">
         <section id="gallery" class="gallery fade-in">
             <div class="gallery-item" data-category="painting">
                 <img src="/img/img1.png" alt="Painting 1">
@@ -41,11 +42,13 @@
                 <img src="/img/img2.png" alt="Digital Art 1">
             </div>
         </section>
+            </div>
     </main> -->
 
 
     <main>
-        <div id="gallery vertical" class="gallery vertical" style="padding-right: 40%;">
+        <div id="main detailed" class="container-detailed">
+        <div id="gallery vertical" class="gallery vertical">
                         <a href="/juliaq/img/Graphic Design/UCAnFly Chritsmas/Christmas felicitation.png" data-fancybox="gallery">
                 <img src="/juliaq/img/Graphic Design/UCAnFly Chritsmas/Christmas felicitation.png" alt="Gallery image 1" />
             </a>
@@ -63,6 +66,7 @@
         </div>
 
 
+            </div>
     </main>
 
 
@@ -126,24 +130,33 @@
         // Initialize Fancybox (if available)
         try {
           if (window.Fancybox) {
-            Fancybox.bind('[data-fancybox]', {
-              Carousel: {
-                Thumbs: false,
-                Toolbar: {
-                  display: {
-                    left: [],
-                    middle: [],
-                    right: ["zoom", "close"]
-                  }
+            Fancybox.bind('[data-fancybox="gallery"]', {
+              Images: {
+                fit:"contain",
+                maxScale: 500,
+              },
+              Toolbar: {
+                display: {
+                  left: [],
+                  middle: [],
+                  right: ["iterateZoom", "close"]
                 }
               },
               Panzoom: {
-                maxScale: 5
+                maxScale: 500
               },
-              dragToClose: false
+              dragToClose: false,
+              Thumbs: {
+                autoStart: false
+              }
             });
+              console.log('Fancybox initialized with custom config');}
+          else {
+            console.warn('Fancybox is not available on window; skipping initialization');
           }
-        } catch(e) { console.warn('Fancybox init failed', e) }
+        } catch(e) { 
+          console.warn('Fancybox init failed', e); 
+        }
 
         // 4. Inicializar Swiper después de insertar scripts and cargar imágenes
         try {
