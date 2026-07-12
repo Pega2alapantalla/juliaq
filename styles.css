@@ -875,7 +875,7 @@ header.fixed,
     align-items: center;
     gap: 40px;
     padding: 40px 0;
-    width:60%;
+    width:49%;
 }
 
 .gallery.vertical {
@@ -1045,7 +1045,7 @@ header.fixed,
 .description{
     position: fixed;
     top: 40%;
-    left: 60%;
+    left:51%;
     max-width: 28%;
     padding: 20px;
     background-color: white;
