@@ -990,8 +990,9 @@ header.fixed,
 
 @media (max-width: 1200px) {
     .container-detailed {
-        width: 100%;
+        /* width: 100%; */
         flex-direction: column;
+        align-items: center;
         gap: 20px;
     }
     .container-detailed .description{
@@ -999,15 +1000,22 @@ header.fixed,
         position: relative;
         align-self: center;
         left: auto;
-        margin-left: 5%;
-        margin-right: 5%;
+        /* margin-left: 5%; */
+        /* margin-right: 5%; */
         max-width: 100% !important;
+        background-color: white;
+        border-radius: 10px;
+        padding: 20px;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.1);
         /* width: 1000px */
     }
     .gallery.vertical a img{
      max-width: 100%;
     }
     
+    .gallery.vertical {
+        width: 100%;
+    }
 }
 /* 
 @media (max-width: 900px) {
