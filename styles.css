@@ -987,6 +987,13 @@ header.fixed,
     overflow: hidden;
 }
 
+.gallery.vertical video{
+    flex-direction: column;
+    max-height: 70vh; /* Ajusta la altura de los videos para ocupar el 70% de la altura de la ventana */
+    max-width: 38vw;
+    border-radius: 5px;
+}
+
 
 @media (max-width: 1200px) {
     .container-detailed {
@@ -1011,6 +1018,10 @@ header.fixed,
     }
     .gallery.vertical a img{
      max-width: 100%;
+    }
+    
+    .gallery.vertical video{
+        max-width: 100%;
     }
     
     .gallery.vertical {
