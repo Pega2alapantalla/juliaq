@@ -460,7 +460,7 @@ header.fixed,
 .dropdown-menu li a:hover {
   color: #0024c4; /* color más brillante */
   background: none; /* fondo claro */
-  font-size: 120%;
+  font-size: 26px; /* ligero aumento de tamaño */
   filter: brightness(1.1);
 }
 
