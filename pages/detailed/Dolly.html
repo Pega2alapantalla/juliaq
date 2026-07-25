@@ -53,10 +53,17 @@
                 <img src="/juliaq/img/sketches/Dolly/dolly.webp" alt="Gallery image 1" />
             </a>
 
-            
+            <!-- <video 
+              class="hover-video" 
+              src="/juliaq/img/ilustracion/Freddie Mercury/making_fred.mp4" 
+              muted 
+              playsinline 
+              loop>
+            </video> -->
+
         </div>
                 <div id="Description" class="description fade-in"  >
-            <h2 class="title">"Dolly" the cow (18/08/2025)</h2>
+            <h2 class="title">"Dolly" the cow (2025)</h2>
             
                         <p>  </p>
             <a href="javascript:history.back()" class="back-button">
@@ -79,6 +86,29 @@
 
     <!-- footer moved to includes/footer.html -->
     <div id="include-footer"></div>
+
+
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+  // Seleccionamos todos los vídeos con la clase 'hover-video'
+  const hoverVideos = document.querySelectorAll('.hover-video');
+
+  hoverVideos.forEach(video => {
+    // Cuando el ratón entra en el vídeo
+    video.addEventListener('mouseenter', () => {
+      video.play();
+    });
+
+    // Cuando el ratón sale del vídeo
+    video.addEventListener('mouseleave', () => {
+      video.pause();
+      // Opcional: Descomenta la siguiente línea si quieres que al quitar el ratón el vídeo vuelva al principio (segundo 0)
+      // video.currentTime = 0; 
+    });
+  });
+});
+</script>
 <script type="module">
       import Swiper from 'https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.mjs'
       async function loadHtml(url){
