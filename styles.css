@@ -245,16 +245,18 @@ header.fixed,
     transition: filter 0.4s  ease-in-out, transform 0.2s ease-in-out, height 0.4s ease-in-out;
 
     /* Ensure the image element itself can't render larger than intended */
-    display: inline-block;
+    display: grid;
     width: 20vw;
 }
 
 /* Shrink visual state: logo smaller, header thinner, rrss logos hidden */
 .site-header.shrink {
     /* reduce vertical padding when shrinked: keep horizontal padding */
-    padding: 3vh 5%;
+    padding: 1vh 5%;
     row-gap: 0; /* reduce gap to prevent pushing navbar down when shrinked */
-    padding-top: 0px;
+    /* padding-top: 0px; */
+    grid-template-rows: auto;
+    grid-template-columns: auto 1fr; /* keep two columns */
 }
 .site-header.shrink .header-logo {
     --logo-scale: 0.78;
@@ -264,7 +266,7 @@ header.fixed,
     transform: translateY(-20px);
 }
 .site-header .header-logo {
-    transform-origin: left bottom;
+    transform-origin: center;
     transform: scale(var(--logo-scale, 1));
     transition: transform 200ms ease, height 200ms ease;
 }
@@ -297,11 +299,11 @@ header.fixed,
 
 .site-header {
     display: grid;
-    grid-template-columns: 2fr auto;
+    grid-template-columns: auto 1fr;
     grid-template-rows: auto auto;
-    column-gap: 24px;
-    row-gap:50px;
-    align-items: start;
+    /* column-gap: 24px; */
+    /* row-gap:50px; */
+    align-items: center;
     padding: 5vh 5%;
 }
 
@@ -310,7 +312,7 @@ header.fixed,
     grid-column: 1;
     grid-row: 1 / span 2;
     justify-self: start;
-    align-self: end; /* Aligns the logo to the bottom of its grid area */
+    align-self: center; /* Aligns the logo to the bottom of its grid area */
 }
 
 .header-rrsslogos {
@@ -494,11 +496,11 @@ header.fixed,
   margin: 0;
   display: flex;
   text-align: left;
-  transform: translateY(-30px);
+  /* transform: translateY(-30px); */
 }
 
 .nav-menu.shrink{
-    transform: translateY(25px);
+    transform: translateY(0px);
 }
 
 .nav-illustration{
