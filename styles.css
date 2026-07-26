@@ -336,8 +336,10 @@ header.fixed,
     height: 30px;
     transition: transform 0.3s ease;
 }
-.rss-logo:hover {
-    transform: scale(1.2);
+@media (min-width: 1734px) {
+    .rss-logo:hover {
+        transform: scale(1.2);
+    }
 }
 
 /* Ensure widths <= 900px use the same hamburger overlay as smaller sizes */
@@ -1282,4 +1284,16 @@ footer{
     /* color: #b32821; */
     /* color:#a2231d; */
     color: royalblue;
+}
+
+
+
+/* Margen de seguridad para que las fotos no toquen los bordes de la pantalla */
+.fancybox-with-margin .fancybox__slide {
+  padding: 24px !important; /* Puedes cambiar los 24px por el espacio que prefieras */
+}
+
+/* Opcional: Evita que el contenedor tenga fondo blanco si la foto tiene transparencias */
+.fancybox-with-margin .fancybox__content {
+  background: transparent !important;
 }
