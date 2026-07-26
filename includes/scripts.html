@@ -230,4 +230,29 @@ document.querySelectorAll('.dropdown-toggle').forEach(button => {
         update();
     }
 })();
+
+
+// CONTROL DE VÍDEOS AL PASAR EL RATÓN (HOVER)
+function initHoverVideos() {
+  // Usamos delegación de eventos en el document para que funcione siempre
+  document.addEventListener('mouseover', (e) => {
+    const video = e.target.closest('.hover-video');
+    if (video && video.tagName === 'VIDEO') {
+      video.play().catch(err => {
+        // Ignora errores si el navegador bloquea el autoplay sin interacción previa
+      });
+    }
+  });
+
+  document.addEventListener('mouseout', (e) => {
+    const video = e.target.closest('.hover-video');
+    if (video && video.tagName === 'VIDEO') {
+      video.pause();
+      // video.currentTime = 0; // Descomenta si quieres que vuelva al inicio
+    }
+  });
+}
+
+// Inicializar control de vídeos
+initHoverVideos();
 </script>
