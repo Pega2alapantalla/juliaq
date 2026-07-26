@@ -93,59 +93,40 @@
 
 
     <!-- footer moved to includes/footer.html -->
-    <div id="include-footer"></div>
+        <div id="include-footer"></div>
 
-<script>
-    document.addEventListener('DOMContentLoaded', () => {
-  // Seleccionamos todos los vídeos con la clase 'hover-video'
-  const hoverVideos = document.querySelectorAll('.hover-video');
+    <script type="module">
+      import Swiper from 'https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.mjs';
 
-  hoverVideos.forEach(video => {
-    // Cuando el ratón entra en el vídeo
-    video.addEventListener('mouseenter', () => {
-      video.play();
-    });
-
-    // Cuando el ratón sale del vídeo
-    video.addEventListener('mouseleave', () => {
-      video.pause();
-      // Opcional: Descomenta la siguiente línea si quieres que al quitar el ratón el vídeo vuelva al principio (segundo 0)
-      // video.currentTime = 0; 
-    });
-  });
-});
-</script>
-<script type="module">
-      import Swiper from 'https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.mjs'
       async function loadHtml(url){
         try {
-          const res = await fetch(url, {cache: 'no-store'});
-          if (!res.ok) return '';
+          const res = await fetch(url, {cache: "no-store"});
+          if (!res.ok) return "";
           return await res.text();
-        } catch(e) { return ''; }
+        } catch(e) { return ""; }
       }
 
       async function insertIncludes(){
         // 1. Inyectar Header
-        const headerHolder = document.getElementById('include-header');
-        if (headerHolder) headerHolder.innerHTML = await loadHtml('includes/header.html');
+        const headerHolder = document.getElementById("include-header");
+        if (headerHolder) headerHolder.innerHTML = await loadHtml("includes/header.html");
 
         // 2. Inyectar Footer
-        const footerHolder = document.getElementById('include-footer');
-        if (footerHolder) footerHolder.innerHTML = await loadHtml('includes/footer.html');
+        const footerHolder = document.getElementById("include-footer");
+        if (footerHolder) footerHolder.innerHTML = await loadHtml("includes/footer.html");
 
-        // 3. Inyectar Scripts externos (Lightbox, JQuery, etc)
+        // 3. Inyectar Scripts de includes/scripts.html
         try {
-          const scriptsText = await loadHtml('includes/scripts.html');
-          const doc = new DOMParser().parseFromString(scriptsText, 'text/html');
-          const scripts = Array.from(doc.querySelectorAll('script'));
+          const scriptsText = await loadHtml("includes/scripts.html");
+          const doc = new DOMParser().parseFromString(scriptsText, "text/html");
+          const scripts = Array.from(doc.querySelectorAll("script"));
           for (const s of scripts){
             await new Promise((resolve) => {
-              const sc = document.createElement('script');
+              const sc = document.createElement("script");
               if (s.src) {
-                const srcAttr = s.getAttribute ? s.getAttribute('src') : s.src;
+                const srcAttr = s.getAttribute ? s.getAttribute("src") : s.src;
                 let resolvedSrc = srcAttr;
-                try { resolvedSrc = new URL(srcAttr, document.baseURI).href; } catch(e) { /* leave as-is */ }
+                try { resolvedSrc = new URL(srcAttr, document.baseURI).href; } catch(e) {}
                 sc.src = resolvedSrc;
                 sc.async = false;
                 sc.onload = resolve;
@@ -157,96 +138,40 @@
               }
             });
           }
-        } catch(e){ console.error('Error loading scripts', e) }
+        } catch(e){ console.error("Error loading scripts", e); }
 
-        // Initialize Fancybox (if available)
-try {
-  if (window.Fancybox) {
-    Fancybox.bind('[data-fancybox="gallery"]', {
-              mainClass: "fancybox-with-margin",
-      // 1. Configuración de imágenes (Va en la raíz, NO dentro de Carousel)
-      Images: { // ¡Ojo! Es "Images" en plural para la configuración global
-        fit:"contain",
-        maxScale: 500,
-      },
-      
-      // 2. Configuración de la barra de herramientas (También en la raíz)
-      Toolbar: {
-        display: {
-          left: [],
-          middle: [],
-          right: ["iterateZoom", "close"]
-        }
-      },
-      
-      // 3. El motor de Zoom (En la raíz)
-      Panzoom: {
-        maxScale: 500
-      },
-      
-      // 4. Desactivar arrastrar para cerrar (En la raíz)
-      dragToClose: false,
-      
-      // 5. Si quieres desactivar las miniaturas, se hace a través de su propio objeto nativo
-      Thumbs: {
-        autoStart: false // Esto evita que se abran las miniaturas por defecto
-      }
-    });
-  
-      console.log('Fancybox initialized with custom config');}
-  else {
-    console.warn('Fancybox is not available on window; skipping initialization');
-  }
-} catch(e) { 
-  console.warn('Fancybox init failed', e); 
-}
-
-        // 4. Inicializar Swiper después de insertar scripts and cargar imágenes
-        try {
-          const imgs = Array.from(document.querySelectorAll('.mySwiper img'));
-          await Promise.all(imgs.map(img => img.complete ? Promise.resolve() : new Promise(res => { img.addEventListener('load', res); img.addEventListener('error', res); })));
-        } catch(e) { /* ignore image load errors */ }
+        // 4. Inicializar Swiper solo en las páginas que tengan carrusel
         initSwiper();
       }
 
       function initSwiper() {
-        if (document.querySelector('.mySwiper')) {
-          console.log('initSwiper: checking Swiper availability', typeof Swiper, document.querySelectorAll('.swiper-slide').length);
-          if (typeof Swiper === 'undefined') {
-            console.error('Swiper is not available on window; slider will not initialize');
-            return;
-          }
-          new Swiper('.mySwiper', {
+        if (document.querySelector(".mySwiper") && typeof Swiper !== "undefined") {
+          new Swiper(".mySwiper", {
             autoplay: false,
-            // PARÁMETROS CLAVE:
-            slidesPerView: 1.2,      // Muestra una imagen y un trozo de la siguiente
-            spaceBetween: 10,        // Separación en píxeles entre fotos
-            centeredSlides: false,    // Empieza pegado a la izquierda
-            
-            // Adaptabilidad (Responsive)
+            slidesPerView: 1.2,
+            spaceBetween: 10,
+            centeredSlides: false,
             breakpoints: {
-                640: { slidesPerView: 2.2 },  // En tablets se ven 2 y pico
-                1024: { slidesPerView: 4 }     // En PC se ven 4 como en tu imagen
+                640: { slidesPerView: 2.2 },
+                1024: { slidesPerView: 4 }
             },
-
             loop: true,
+            a11y: false,
+            preventClicksPropagation: false,
             navigation: {
-                nextEl: '.swiper-button-next',
-                prevEl: '.swiper-button-prev',
+                nextEl: ".swiper-button-next",
+                prevEl: ".swiper-button-prev",
             },
-            });
+          });
         }
-        
       }
 
-      // Ejecución
-      if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', insertIncludes);
+      // Ejecución al cargar el DOM
+      if (document.readyState === "loading") {
+        document.addEventListener("DOMContentLoaded", insertIncludes);
       } else {
         insertIncludes();
       }
-       </script>
-
-
+    </script>
 </body>
 </html>

@@ -1,35 +1,111 @@
+<!-- Librerías de Terceros -->
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="includes/ui-6.1.13/dist/fancybox/fancybox.umd.js"></script>
-<!-- Lightbox removed: using Fancybox instead -->
 
 <script>
-// Fade-in observer
-const faders = document.querySelectorAll('.fade-in');
+// 1. LÓGICA DE FILTROS CON ANIMACIÓN FADE/COLLAPSE
+function initGalleryFilters() {
+  const filterButtons = document.querySelectorAll('.illustration-categories .nav-item, [data-filter]');
+  const galleryItems = document.querySelectorAll('#gallery .gallery-item, .gallery-item');
 
-const appearOptions = { threshold: 0.1 };
+  if (filterButtons.length === 0 || galleryItems.length === 0) return;
 
-const appearOnScroll = new IntersectionObserver((entries, observer) => {
-    entries.forEach(entry => {
-        if(entry.isIntersecting){
-            entry.target.classList.add('visible');
-            observer.unobserve(entry.target);
+  function collapseAfterFade(item){
+    const onEnd = (e) => {
+      if (e.propertyName === 'opacity'){
+        item.classList.add('collapsed');
+        item.removeEventListener('transitionend', onEnd);
+      }
+    };
+    item.addEventListener('transitionend', onEnd);
+  }
+
+  function showItem(item){
+    item.classList.remove('collapsed');
+    void item.offsetWidth; // Force reflow para reaplicar transiciones CSS
+    item.classList.remove('hidden');
+  }
+
+  function hideItem(item){
+    if (!item.classList.contains('hidden')){
+      item.classList.add('hidden');
+      collapseAfterFade(item);
+    }
+  }
+
+  filterButtons.forEach(button => {
+    button.addEventListener('click', (e) => {
+      e.preventDefault();
+      const filter = button.getAttribute('data-filter');
+      
+      filterButtons.forEach(btn => btn.classList.remove('active'));
+      button.classList.add('active');
+
+      galleryItems.forEach(item => {
+        const itemCategory = item.getAttribute('data-category');
+        if (filter === 'all' || filter === '*' || itemCategory === filter) {
+          showItem(item);
+        } else {
+          hideItem(item);
         }
+      });
     });
-}, appearOptions);
+  });
+}
 
-faders.forEach(fader => appearOnScroll.observe(fader));
-</script>
+// 2. INICIALIZACIÓN DE FANCYBOX
+function initFancybox() {
+  if (window.Fancybox) {
+    Fancybox.bind('[data-fancybox]', {
+      mainClass: "fancybox-with-margin",
+      Images: {
+        fit: "contain",
+        maxScale: 500,
+      },
+      Toolbar: {
+        display: {
+          left: [],
+          middle: [],
+          right: ["iterateZoom", "close"]
+        }
+      },
+      Panzoom: {
+        maxScale: 500
+      },
+      dragToClose: false,
+      Thumbs: {
+        autoStart: false
+      }
+    });
+  }
+}
 
-<script>
-// Header shrink feature removed to keep header layout stable and sticky.
-</script>
+// Ejecutar al cargar la página
+initFancybox();
+initGalleryFilters();
 
-<script>
-// Navbar dropdowns and hover setup
+// 3. ANIMACIÓN FADE-IN AL SCROLL
+const faders = document.querySelectorAll('.fade-in');
+if (faders.length > 0) {
+    const appearOptions = { threshold: 0.1 };
+    const appearOnScroll = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+                observer.unobserve(entry.target);
+            }
+        });
+    }, appearOptions);
+
+    faders.forEach(fader => appearOnScroll.observe(fader));
+}
+
+// 4. MENÚ NAVEGACIÓN Y DROPDOWNS
 const navbar = document.getElementById('navbar');
 const openItems = new Set();
 
 function refreshNavbarState() {
+    if (!navbar) return;
     if (openItems.size > 0) {
         navbar.classList.add('dropdown-open');
     } else {
@@ -45,72 +121,57 @@ function closeAllDropdowns() {
     refreshNavbarState();
 }
 
-function setupHoverDropdowns() {
-    if (window.matchMedia('(min-width: 769px)').matches) {
-        document.querySelectorAll('.nav-item.dropdown').forEach(item => {
-            item.addEventListener('mouseenter', () => {
-                item.classList.add('open');
-                openItems.add(item);
-                refreshNavbarState();
-            });
-            item.addEventListener('mouseleave', () => {
-                item.classList.remove('open');
-                openItems.delete(item);
-                refreshNavbarState();
-            });
+if (window.matchMedia('(min-width: 769px)').matches) {
+    document.querySelectorAll('.nav-item.dropdown').forEach(item => {
+        item.addEventListener('mouseenter', () => {
+            item.classList.add('open');
+            openItems.add(item);
+            refreshNavbarState();
         });
-    }
+        item.addEventListener('mouseleave', () => {
+            item.classList.remove('open');
+            openItems.delete(item);
+            refreshNavbarState();
+        });
+    });
 }
 
-setupHoverDropdowns();
+window.addEventListener('resize', closeAllDropdowns);
 
-window.addEventListener('resize', () => {
-    closeAllDropdowns();
-});
-</script>
-
-<script>
-// Hamburger toggle (also toggle body class to prevent background scroll)
 const hamburger = document.getElementById('hamburger');
-hamburger.addEventListener('click', () => {
-    const isOpen = navbar.classList.toggle('open');
-    document.body.classList.toggle('nav-open', isOpen);
-    hamburger.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
-});
+if (hamburger && navbar) {
+    hamburger.addEventListener('click', () => {
+        const isOpen = navbar.classList.toggle('open');
+        document.body.classList.toggle('nav-open', isOpen);
+        hamburger.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+    });
+}
 
-// Dropdown toggles
 document.querySelectorAll('.dropdown-toggle').forEach(button => {
     button.addEventListener('click', (e) => {
         e.preventDefault();
         const item = button.parentElement;
-
         const isOpen = item.classList.contains('open');
 
-        // Close all dropdowns first
         document.querySelectorAll('.nav-item.dropdown').forEach(otherItem => {
             otherItem.classList.remove('open');
         });
 
-        // If it was previously closed, open it; otherwise keep closed
         if (!isOpen) {
             item.classList.add('open');
         }
     });
 });
-</script>
 
-<script>
-// Fixed-header fallback: make header fixed and insert a placeholder
+// 5. FIJAR Y ENCOGER HEADER AL SCROLL
 (function(){
     function enableFixedHeader(){
         const includeHolder = document.getElementById('include-header');
         const header = includeHolder ? includeHolder.querySelector('header.site-header') : document.querySelector('header.site-header');
         if (!header) return;
 
-        // Add class that forces fixed positioning
         header.classList.add('is-fixed');
 
-        // Create or update placeholder right after the header to avoid content jump
         function updatePlaceholder(){
             let ph = document.getElementById('header-placeholder');
             if (!ph){
@@ -118,12 +179,10 @@ document.querySelectorAll('.dropdown-toggle').forEach(button => {
                 ph.id = 'header-placeholder';
                 header.parentNode.insertBefore(ph, header.nextSibling);
             }
-            // Use getBoundingClientRect to include padding/visual height
             const h = header.getBoundingClientRect().height;
             ph.style.height = h + 'px';
         }
 
-        // Update on load, resize and when header's size changes
         updatePlaceholder();
         window.addEventListener('resize', updatePlaceholder, {passive:true});
         if (window.ResizeObserver) {
@@ -134,11 +193,9 @@ document.querySelectorAll('.dropdown-toggle').forEach(button => {
 
     if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', enableFixedHeader); else enableFixedHeader();
 })();
-</script>
-<script>
-// Shrink header on scroll: scale logo, reduce header padding, hide rrss logos
+
 (function(){
-    const THRESHOLD = 48; // px scrolled to trigger shrink
+    const THRESHOLD = 48;
     let ticking = false;
 
     function update() {
