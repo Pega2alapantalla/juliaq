@@ -1299,3 +1299,9 @@ footer{
 .fancybox-with-margin .fancybox__content {
   background: transparent !important;
 }
+
+
+.video-poster{
+    display: none !important;
+
+}

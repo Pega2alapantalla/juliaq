@@ -236,21 +236,20 @@ document.querySelectorAll('.dropdown-toggle').forEach(button => {
 function initHoverVideos() {
   // Usamos delegación de eventos en el document para que funcione siempre
   document.addEventListener('mouseover', (e) => {
-    const video = e.target.closest('.hover-video');
-    if (video && video.tagName === 'VIDEO') {
-      video.play().catch(err => {
-        // Ignora errores si el navegador bloquea el autoplay sin interacción previa
-      });
-    }
-  });
+  const link = e.target.closest('.fancybox-video-link');
+  if (link) {
+    const video = link.querySelector('video');
+    if (video) video.play().catch(() => {});
+  }
+});
 
-  document.addEventListener('mouseout', (e) => {
-    const video = e.target.closest('.hover-video');
-    if (video && video.tagName === 'VIDEO') {
-      video.pause();
-      // video.currentTime = 0; // Descomenta si quieres que vuelva al inicio
-    }
-  });
+document.addEventListener('mouseout', (e) => {
+  const link = e.target.closest('.fancybox-video-link');
+  if (link) {
+    const video = link.querySelector('video');
+    if (video) video.pause();
+  }
+});
 }
 
 // Inicializar control de vídeos
