@@ -51,21 +51,39 @@
                 <img src="img/ilustracion/Freddie Mercury/1.webp" alt="Gallery image 1" />
             </a>
 
-            <a href="img/ilustracion/Freddie Mercury/2.webp" data-fancybox="gallery">
-                <img src="img/ilustracion/Freddie Mercury/2.webp" alt="Gallery image 2" />
+            <a href="img/ilustracion/Freddie Mercury/2_resized.webp" data-fancybox="gallery">
+                <img src="img/ilustracion/Freddie Mercury/2_resized.webp" alt="Gallery image 2" />
             </a>
             <a href="img/ilustracion/Freddie Mercury/3.webp" data-fancybox="gallery">
                 <img src="img/ilustracion/Freddie Mercury/3.webp" alt="Gallery image 2" />
             </a>
            
-            <video 
-              class="hover-video" 
-              src="/juliaq/img/ilustracion/Freddie Mercury/making_fred.mp4" 
-              muted 
-              playsinline 
-              loop>
-            </video>
+           <a 
+              href="/juliaq/img/ilustracion/Freddie Mercury/making_fred.mp4" 
+              data-fancybox="gallery" 
+              data-type="html5video"
+              data-width="1080"
+              data-height="1524"
+              data-caption="Making of Freddie Mercury"
+              class="fancybox-video-link"
+            >
+              <!-- Imagen especial que servirá como miniatura/portada -->
+              <img 
+                src="/juliaq/img/ilustracion/Freddie Mercury/1.webp" 
+                alt="Making of Freddie Mercury" 
+                class="video-poster"
+              >
 
+              <!-- El vídeo (oculto por defecto hasta hacer hover) -->
+              <video 
+                class="hover-video" 
+                src="/juliaq/img/ilustracion/Freddie Mercury/making_fred.mp4" 
+                muted 
+                playsinline 
+                loop
+                controls>
+              </video>
+            </a>
             
         </div>
         <div id="Description" class="description fade-in">
