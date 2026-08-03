@@ -10,7 +10,7 @@
     <!-- Lightbox CSS removed (Fancybox used) -->
     
 </head>
-  <body>
+ <body>
     <div id="include-header"></div>
     <section class="about-section">
       <div class="container fade-in about-grid">
@@ -19,37 +19,36 @@
           <h1>About me</h1>
 
           <p class="lead">
-            Hi there! I’m <strong>Julia</strong>, a character designer, concept artist and graphic designer based in Spain.
+            Hello! I'm <strong>Julia Quintana</strong>, an illustrator, graphic designer, and concept artist based in Cádiz, Spain.
           </p>
 
           <div class="about-paragraphs">
             <p>
-              From a young age, I’ve always been drawn to expressive characters and imaginative worlds. I love creating visuals that feel alive—full of personality, emotion, and small details that tell a story beyond the image. Over time, this passion has evolved into a focus on character design and storytelling, exploring the balance between playful, colorful aesthetics and emotional depth.
-            </p>
-            
-            <h3>Education & Background</h3>
-            <p>
-              I studied <strong>Fine Arts in Seville</strong> and later completed a two-year Master’s in Concept Art and Illustration at the Universal Arts School, which allowed me to refine my skills and expand my artistic approach across different styles and disciplines.
-            </p>
-
-            <h3>Professional Experience</h3>
-            <p>
-              Alongside my artistic practice, I’ve worked as a graphic designer for two years on the <strong>UCAnFly project</strong>, collaborating with the <strong>European Space Agency</strong>. This experience gave me the opportunity to contribute in a multidisciplinary team and apply design in technical and collaborative contexts.
+              Over the past few years, I have worked on illustration, graphic design, and visual communication projects. I led the Marketing and Graphic Design department for <strong>UCAnFly</strong>, a nanosatellite project at the University of Cádiz selected by the <strong>European Space Agency's Fly Your Satellite! programme</strong>. In this role, I developed the project's visual identity, designed graphic materials, managed social media, and created audiovisual content. Alongside this, I have worked as a freelance creative, producing illustrations, branding, and 3D visualizations for a variety of clients.
             </p>
 
             <p>
-              My work is inspired by animation and stories that blend humor with heartfelt moments. I’m especially interested in creating characters and worlds that feel relatable, expressive, and full of life. Currently, I’m working on my professional portfolio and developing personal projects.
+              I consider myself a naturally curious person. I enjoy understanding how things work, asking questions, and finding creative solutions. I love collaborating with others, communicating ideas, and bringing a thoughtful and practical perspective to every project. Creativity is at the heart of everything I do, and I'm always looking for new ways to learn, grow, and improve my craft.
+            </p>
+
+            <h3>Exploration & Mediums</h3>
+            <p>
+              Throughout my career, I have explored a wide range of creative disciplines, including illustration, graphic design, sculpture, printmaking, photography, and digital art. I believe that experimenting with different techniques is one of the best ways to grow as an artist and discover new ways of telling stories. Rather than limiting myself to a single discipline, I enjoy taking on new challenges and learning tools that expand my creative process.
+            </p>
+
+            <p>
+              My work is inspired by imagination, nostalgia, and the unique way children perceive the world before rules reshape their perspective. I'm passionate about creating images that evoke emotion, spark curiosity, and tell stories that connect with people.
             </p>
 
             <blockquote class="personal-note">
-              When I’m not drawing, I enjoy doing crafts, experimenting with materials, and finding inspiration in everyday life and the people around me.
+              "To me, creativity is more than just a tool—it's a way of understanding the world."
             </blockquote>
           </div>
 
         </div>
 
         <div class="about-image-content">
-          <img src="/img/picss.jpeg" alt="Julia - Character Designer" class="profile-photo">
+          <img src="/img/picss.jpeg" alt="Julia Quintana - Illustrator & Graphic Designer" class="profile-photo">
         </div>
 
       </div>
@@ -57,7 +56,7 @@
 
 
     <!-- footer moved to includes/footer.html -->
-        <div id="include-footer"></div>
+    <div id="include-footer"></div>
 
     <script type="module">
       import Swiper from 'https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.mjs';
@@ -71,17 +70,17 @@
       }
 
       async function insertIncludes(){
-        // 1. Inyectar Header
+        // 1. Inyectar Header con ruta absoluta
         const headerHolder = document.getElementById("include-header");
-        if (headerHolder) headerHolder.innerHTML = await loadHtml("includes/header.html");
+        if (headerHolder) headerHolder.innerHTML = await loadHtml("/includes/header.html");
 
-        // 2. Inyectar Footer
+        // 2. Inyectar Footer con ruta absoluta
         const footerHolder = document.getElementById("include-footer");
-        if (footerHolder) footerHolder.innerHTML = await loadHtml("includes/footer.html");
+        if (footerHolder) footerHolder.innerHTML = await loadHtml("/includes/footer.html");
 
-        // 3. Inyectar Scripts de includes/scripts.html
+        // 3. Inyectar Scripts de /includes/scripts.html
         try {
-          const scriptsText = await loadHtml("includes/scripts.html");
+          const scriptsText = await loadHtml("/includes/scripts.html");
           const doc = new DOMParser().parseFromString(scriptsText, "text/html");
           const scripts = Array.from(doc.querySelectorAll("script"));
           for (const s of scripts){
