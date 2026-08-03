@@ -1261,6 +1261,7 @@ footer{
     padding-top: 2vh;
     display: flex;
     justify-content: center;
+    width:100%;
 }
 
 
